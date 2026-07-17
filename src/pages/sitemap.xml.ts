@@ -4,6 +4,7 @@ import { siteConfig } from "../config/site";
 const indexableRoutes = [
   "/",
   "/blog/",
+  "/blog/como-calcular-adicional-noturno/",
   "/sobre/",
   "/contato/",
   "/politica-de-privacidade/",

@@ -10,6 +10,9 @@ interface Props {
   canonicalPath: string;
   noindex?: boolean;
   image?: string;
+  ogType?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 const {
@@ -17,7 +20,10 @@ const {
   description,
   canonicalPath,
   noindex = false,
-  image = "/og-calculadora.svg"
+  image = "/og-calculadora.svg",
+  ogType = "website",
+  publishedTime,
+  modifiedTime
 } = Astro.props;
 const canonical = new URL(canonicalPath, `${siteConfig.url}/`).toString();
 const socialImage = new URL(image, `${siteConfig.url}/`).toString();
@@ -33,13 +39,15 @@ const socialImage = new URL(image, `${siteConfig.url}/`).toString();
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, follow" />}
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />

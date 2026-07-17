@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-labelledby="title description">
+  <title id="title">Cálculo do adicional noturno</title>
+  <desc id="description">Ilustração de uma calculadora, relógio noturno e folha de pagamento.</desc>
+  <rect width="1200" height="630" fill="#eaf3f1"/>
+  <circle cx="1060" cy="95" r="240" fill="#d7e9e5"/>
+  <circle cx="126" cy="570" r="190" fill="#f4dfad"/>
+  <rect x="128" y="92" width="944" height="446" rx="36" fill="#fff" stroke="#c4d8d4" stroke-width="3"/>
+  <rect x="184" y="148" width="384" height="330" rx="24" fill="#124e4a"/>
+  <rect x="224" y="190" width="304" height="72" rx="12" fill="#e9f3f1"/>
+  <g fill="#f8fcfb">
+    <rect x="224" y="290" width="72" height="56" rx="10"/>
+    <rect x="328" y="290" width="72" height="56" rx="10"/>
+    <rect x="432" y="290" width="96" height="56" rx="10"/>
+    <rect x="224" y="374" width="72" height="56" rx="10"/>
+    <rect x="328" y="374" width="72" height="56" rx="10"/>
+    <rect x="432" y="374" width="96" height="56" rx="10"/>
+  </g>
+  <rect x="640" y="156" width="360" height="314" rx="22" fill="#f6f9f8" stroke="#c8dad7" stroke-width="3"/>
+  <rect x="690" y="222" width="220" height="18" rx="9" fill="#b8cfcb"/>
+  <rect x="690" y="272" width="260" height="18" rx="9" fill="#d3e1df"/>
+  <rect x="690" y="322" width="180" height="18" rx="9" fill="#d3e1df"/>
+  <rect x="690" y="386" width="212" height="34" rx="8" fill="#e6b858"/>
+  <path d="M925 110a80 80 0 1 0 55 131 68 68 0 0 1-55-131Z" fill="#17635e"/>
+  <path d="m1010 106 7 17 17 7-17 7-7 17-7-17-17-7 17-7 7-17Z" fill="#e6b858"/>
+</svg>

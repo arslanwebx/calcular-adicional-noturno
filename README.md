@@ -1,6 +1,6 @@
 # Calcular Adicional Noturno
 
-Site estático em Astro para estimar o adicional noturno no navegador. O projeto não possui banco de dados, API de cálculo, analytics ou armazenamento dos valores digitados.
+Site em Astro para estimar o adicional noturno no navegador. O projeto não possui banco de dados nem armazenamento dos valores digitados. A audiência geral das páginas é medida pelo Google Analytics 4, propriedade `G-GFSN15TNEC`.
 
 ## Domínio e contato
 

@@ -60,6 +60,9 @@ const { policy, title, description } = Astro.props;
           <h2>Dados usados pela calculadora</h2>
           <p>Os valores informados na calculadora, como salário-base, divisor, horários e quantidade de horas, são processados no próprio navegador. Esses dados não são enviados ao nosso servidor, não são associados a uma conta e não são armazenados pelo site. Ao atualizar ou fechar a página, os campos deixam de fazer parte da sessão, salvo recursos normais do próprio navegador, como o preenchimento automático controlado pelo usuário.</p>
 
+          <h2>Dados de navegação e Google Analytics</h2>
+          <p>Usamos o Google Analytics 4 para compreender, de forma agregada, quais páginas são visitadas e como o site é utilizado. O serviço pode tratar informações como páginas acessadas, horário, tipo de dispositivo, navegador, localização aproximada e identificadores técnicos. Os valores digitados na calculadora e o conteúdo enviado pelo formulário de contato não são configurados como eventos de análise.</p>
+
           <h2>Formulário de contato</h2>
           <p>Quando você envia uma mensagem, tratamos nome, endereço de e-mail, assunto e conteúdo para receber a solicitação e responder. O envio é encaminhado ao endereço {siteConfig.contactEmail} por um provedor de entrega de e-mail configurado no ambiente da Cloudflare. Não envie documentos, senhas, dados bancários, CPF, informações médicas ou cópias integrais de holerites.</p>
           <p>A base para esse tratamento é a iniciativa do próprio titular ao solicitar contato e o interesse legítimo em manter um canal de comunicação seguro. As mensagens podem ser conservadas pelo tempo necessário para responder, registrar correções editoriais e cumprir obrigações legítimas, sendo eliminadas quando deixarem de ser úteis.</p>
@@ -135,7 +138,7 @@ const { policy, title, description } = Astro.props;
           <p>Esta Política de Cookies descreve as tecnologias que podem armazenar ou acessar informações no dispositivo durante a navegação. O objetivo é diferenciar recursos necessários ao funcionamento de mecanismos de publicidade ou rastreamento.</p>
 
           <h2>Situação atual do site</h2>
-          <p>Atualmente, a calculadora não precisa de cookies para realizar contas e não salva salário, jornada ou resultados em armazenamento local. Também não utilizamos cookies próprios de publicidade, remarketing ou personalização comportamental. Por esse motivo, não exibimos um banner de consentimento apenas para criar uma etapa desnecessária.</p>
+          <p>A calculadora não precisa de cookies para realizar contas e não salva salário, jornada ou resultados em armazenamento local. O site utiliza o Google Analytics 4 para medir audiência e entender o uso geral das páginas. Não utilizamos cookies próprios de publicidade, remarketing ou personalização comportamental.</p>
 
           <h2>O que são cookies</h2>
           <p>Cookies são pequenos registros enviados por um site e mantidos pelo navegador por determinado período. Eles podem lembrar preferências, preservar uma sessão, reforçar segurança ou medir uso. Tecnologias semelhantes incluem armazenamento local, pixels, identificadores e registros técnicos de rede.</p>
@@ -146,11 +149,14 @@ const { policy, title, description } = Astro.props;
           <h2>Formulários e newsletter</h2>
           <p>O envio de contato e a inscrição na newsletter acontecem por requisições seguras ao servidor. Os formulários não dependem de cookies publicitários. Registros técnicos podem ser processados temporariamente para prevenção de fraude, diagnóstico de falhas e entrega da mensagem, conforme explicado na Política de Privacidade.</p>
 
+          <h2>Cookies de medição</h2>
+          <p>O Google Analytics pode definir cookies e identificadores para distinguir visitas, produzir estatísticas de audiência e medir interações com as páginas. Esses dados são tratados conforme as políticas do Google. Você pode limitar ou apagar esses cookies pelas configurações do navegador e por ferramentas de bloqueio de medição compatíveis.</p>
+
           <h2>Como controlar cookies</h2>
           <p>Os navegadores permitem visualizar, bloquear e apagar cookies. O bloqueio total pode afetar recursos de segurança da plataforma, embora a calculadora principal continue projetada para funcionar sem armazenamento persistente. Consulte as configurações de privacidade do navegador utilizado para fazer sua escolha.</p>
 
           <h2>Mudanças futuras</h2>
-          <p>Se forem adicionadas ferramentas de análise, publicidade ou outros recursos não essenciais, esta política será atualizada antes da ativação. Quando exigido, o site também apresentará controles de consentimento adequados. Não adicionaremos um mecanismo de rastreamento silencioso incompatível com esta descrição.</p>
+          <p>Se forem adicionadas ferramentas de publicidade ou outros recursos não essenciais além da medição descrita nesta página, esta política será atualizada. Quando exigido, o site também apresentará controles de consentimento adequados. Não adicionaremos mecanismos de rastreamento incompatíveis com esta descrição.</p>
 
           <h2>Dúvidas</h2>
           <p>Para perguntar sobre tecnologias utilizadas no site, entre em contato pelo e-mail <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>.</p>

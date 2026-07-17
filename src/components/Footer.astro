@@ -1,0 +1,25 @@
+---
+import { mainNavigation, policyNavigation, siteConfig } from "../config/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand footer-brand" href="/">{siteConfig.name}</a>
+      <p>Uma ferramenta informativa para entender estimativas de trabalho noturno.</p>
+    </div>
+    <nav aria-label="Links do site">
+      <strong>Navegação</strong>
+      {mainNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+    <nav aria-label="Políticas">
+      <strong>Políticas</strong>
+      {policyNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+  </div>
+  <div class="container footer-bottom">
+    <p>© {year} {siteConfig.name}.</p>
+    <p>Os resultados são estimativas e não substituem a folha de pagamento nem orientação profissional.</p>
+  </div>
+</footer>

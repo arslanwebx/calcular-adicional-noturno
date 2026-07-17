@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import JsonLd from "../components/JsonLd.astro";
+import { siteConfig } from "../config/site";
+
+const title = "Sobre o site | Adicional Noturno";
+const description =
+  "Conheça o objetivo e a metodologia da calculadora informativa de adicional noturno.";
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/sobre/">
+  <JsonLd data={{
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: title,
+    description,
+    url: `${siteConfig.url}/sobre/`,
+    inLanguage: "pt-BR"
+  }} />
+  <section class="page-hero">
+    <div class="reading-width">
+      <h1>Sobre este site</h1>
+      <p>Este projeto oferece uma calculadora informativa para ajudar trabalhadores e profissionais de folha a compreender uma estimativa do adicional noturno.</p>
+    </div>
+  </section>
+  <article class="content-section">
+    <div class="reading-width prose">
+      <h2>Nosso objetivo</h2>
+      <p>O cálculo aparece de forma transparente: a ferramenta mostra valor da hora normal, horas consideradas, percentual aplicado e composição do resultado. Nenhum dado de salário ou jornada é enviado para um servidor.</p>
+      <h2>Metodologia</h2>
+      <p>Os padrões partem da regra geral do trabalho urbano prevista no artigo 73 da CLT. A lógica é separada da interface e testada com cenários de turnos que atravessam a meia-noite, hora reduzida e valores personalizados.</p>
+      <p>Priorizamos fontes oficiais, como o texto legal publicado no Portal Planalto e a jurisprudência do Tribunal Superior do Trabalho. Quando há exceções ou interpretações que dependem do caso concreto, a página informa essa limitação em vez de prometer uma resposta universal.</p>
+      <h2>Limites da ferramenta</h2>
+      <p>O resultado não substitui a apuração feita pelo empregador, a convenção coletiva ou a orientação de um profissional. O site não conhece seu contrato, categoria, espelho de ponto ou demais rubricas da folha.</p>
+    </div>
+  </article>
+</BaseLayout>

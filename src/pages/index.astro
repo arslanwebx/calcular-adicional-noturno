@@ -1,0 +1,89 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Calculator from "../components/calculator/Calculator.astro";
+import HomeContent from "../components/HomeContent.astro";
+import JsonLd from "../components/JsonLd.astro";
+import { siteConfig } from "../config/site";
+
+const title = "Calcular Adicional Noturno: Calculadora Grátis e Simples";
+const description =
+  "Use a calculadora para estimar o adicional noturno com salário, jornada, percentual e hora reduzida. Veja o cálculo detalhado.";
+
+const faqs = [
+  ["Qual é o percentual do adicional noturno?", "Para o empregado urbano sujeito à regra geral da CLT, o adicional é de pelo menos 20% sobre a hora diurna. Convenções e acordos coletivos podem prever percentual maior. Trabalhadores rurais, servidores e categorias especiais podem seguir regras diferentes."],
+  ["Como funciona a hora noturna de 52 minutos e 30 segundos?", "Na regra urbana geral, cada período de 52 minutos e 30 segundos é computado como uma hora noturna. Por isso, sete horas reais entre 22h e 5h correspondem a oito horas noturnas para esse cálculo."],
+  ["Quem trabalha depois das 5h recebe adicional?", "Pode receber em situações de prorrogação da jornada noturna. A Súmula 60 do TST trata da jornada integralmente cumprida no período noturno e prorrogada. Como a escala e a norma coletiva influenciam a análise, a opção da calculadora é manual e deve ser usada com cautela."],
+  ["O adicional noturno entra no cálculo das horas extras?", "Quando a hora extra é prestada no período noturno, as parcelas podem se combinar. A calculadora separa o adicional noturno e o adicional de hora extra para deixar a estimativa compreensível, mas a rubrica final da folha pode seguir a convenção coletiva e o método do empregador."],
+  ["Trabalhador rural usa a mesma regra?", "Não. A Lei nº 5.889/1973 define períodos noturnos diferentes para lavoura e pecuária e adicional de 25%. Os padrões desta ferramenta são voltados ao empregado urbano e precisam ser personalizados para uma simulação diferente."],
+  ["A convenção coletiva pode aumentar o percentual?", "Sim. Uma norma coletiva pode estabelecer condição mais favorável, como percentual maior, e também pode detalhar divisor, horários e reflexos. Confira o instrumento vigente da sua categoria."],
+  ["Como conferir o cálculo no holerite?", "Compare salário-base, divisor, quantidade de horas noturnas, percentual e eventual hora extra. Observe se as horas estão em formato real ou já reduzido. Diferenças pequenas podem vir de arredondamentos; diferenças relevantes merecem conferência com o setor de folha."],
+  ["A calculadora substitui o cálculo da empresa?", "Não. Ela oferece uma estimativa informativa com os dados digitados no navegador. A folha considera contrato, ponto, norma coletiva, reflexos, descontos e regras específicas que não podem ser inferidos por uma ferramenta geral."]
+];
+
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    url: `${siteConfig.url}/`,
+    inLanguage: "pt-BR"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${siteConfig.url}/`,
+    inLanguage: "pt-BR",
+    dateModified: siteConfig.contentModified
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Calculadora de Adicional Noturno",
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "Qualquer navegador moderno",
+    url: `${siteConfig.url}/#calculadora`,
+    description,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "BRL" },
+    inLanguage: "pt-BR"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(([question, answer]) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer }
+    }))
+  }
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/">
+  <JsonLd data={schemas} />
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <h1>Calcular Adicional Noturno</h1>
+        <p class="hero-lead">Informe seu salário, divisor mensal e horas trabalhadas à noite para estimar o valor do adicional. A calculadora mostra cada etapa da conta e permite ajustar as regras da sua jornada.</p>
+        <a class="button primary-button" href="#calculadora">Ir para a calculadora</a>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 420 280" width="420" height="280">
+          <rect x="34" y="38" width="352" height="204" rx="24" fill="#fff"/>
+          <rect x="58" y="62" width="138" height="18" rx="9" fill="#dbe8e6"/>
+          <rect x="58" y="96" width="304" height="48" rx="10" fill="#f2f6f5"/>
+          <rect x="58" y="160" width="140" height="54" rx="10" fill="#124e4a"/>
+          <rect x="216" y="160" width="146" height="54" rx="10" fill="#e8b95b"/>
+          <path d="M308 43a47 47 0 1 0 38 75 40 40 0 0 1-38-75Z" fill="#1a6460"/>
+          <path d="m341 31 3 8 8 3-8 3-3 8-3-8-8-3 8-3 3-8Z" fill="#e8b95b"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+  <div class="container calculator-container">
+    <Calculator />
+  </div>
+  <HomeContent />
+</BaseLayout>

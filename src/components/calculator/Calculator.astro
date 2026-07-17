@@ -1,0 +1,328 @@
+<section class="calculator-shell" id="calculadora" aria-labelledby="calculator-title">
+  <div class="calculator-heading">
+    <div>
+      <h2 id="calculator-title">Calculadora de adicional noturno</h2>
+      <p>Preencha os dados da sua jornada. Os valores ficam somente neste navegador.</p>
+    </div>
+    <span class="privacy-note">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+        <path d="M7 10V8a5 5 0 0 1 10 0v2m-11 0h12v10H6V10Z" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      Cálculo local, sem envio de dados
+    </span>
+  </div>
+
+  <form id="night-calculator" novalidate>
+    <div id="error-summary" class="error-summary" role="alert" tabindex="-1" hidden>
+      <strong>Revise os dados informados:</strong>
+      <ul></ul>
+    </div>
+
+    <fieldset class="form-section">
+      <legend>Dados de remuneração</legend>
+      <div class="form-grid three-columns">
+        <div class="field">
+          <label for="salary">Salário-base mensal</label>
+          <div class="input-prefix">
+            <span>R$</span>
+            <input id="salary" name="salary" inputmode="decimal" autocomplete="off" value="2.200,00" aria-describedby="salary-help" />
+          </div>
+          <small id="salary-help">Use o salário-base, sem somar benefícios.</small>
+        </div>
+        <div class="field">
+          <label for="divisor">Jornada mensal (divisor)</label>
+          <input id="divisor" name="divisor" type="number" min="1" step="1" value="220" list="common-divisors" aria-describedby="divisor-help" />
+          <datalist id="common-divisors">
+            <option value="220"></option>
+            <option value="200"></option>
+            <option value="180"></option>
+          </datalist>
+          <small id="divisor-help">Pode variar conforme contrato ou escala.</small>
+        </div>
+        <div class="field">
+          <label for="premium">Percentual noturno</label>
+          <div class="input-suffix">
+            <input id="premium" name="premium" type="number" min="0" step="0.01" value="20" aria-describedby="premium-help" />
+            <span>%</span>
+          </div>
+          <small id="premium-help">20% é o mínimo da regra urbana geral.</small>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-section">
+      <legend>Como você quer informar a jornada?</legend>
+      <div class="segmented-control">
+        <label>
+          <input type="radio" name="method" value="monthly" checked />
+          <span>Total de horas no mês</span>
+        </label>
+        <label>
+          <input type="radio" name="method" value="shift" />
+          <span>Entrada e saída por turno</span>
+        </label>
+      </div>
+
+      <div id="monthly-fields" class="method-fields">
+        <div class="form-grid two-columns">
+          <div class="field">
+            <label for="monthly-hours">Total de horas noturnas</label>
+            <input id="monthly-hours" name="monthlyHours" type="number" min="0" step="0.01" value="35" />
+          </div>
+          <div class="field">
+            <label for="hours-type">Como essas horas foram contadas?</label>
+            <select id="hours-type" name="hoursType" aria-describedby="hours-type-help">
+              <option value="clock">Horas reais do relógio</option>
+              <option value="converted">Horas noturnas já convertidas</option>
+            </select>
+            <small id="hours-type-help">Evita aplicar a redução de 52min30s duas vezes.</small>
+          </div>
+        </div>
+      </div>
+
+      <div id="shift-fields" class="method-fields" hidden>
+        <div class="form-grid three-columns">
+          <div class="field">
+            <label for="shift-start">Entrada</label>
+            <input id="shift-start" name="shiftStart" type="time" value="22:00" />
+          </div>
+          <div class="field">
+            <label for="shift-end">Saída</label>
+            <input id="shift-end" name="shiftEnd" type="time" value="05:00" />
+          </div>
+          <div class="field">
+            <label for="shifts">Turnos no mês</label>
+            <input id="shifts" name="shifts" type="number" min="1" step="1" value="5" />
+          </div>
+        </div>
+        <p class="field-note">O cálculo considera apenas a sobreposição do turno com o período noturno configurado.</p>
+      </div>
+    </fieldset>
+
+    <div class="toggle-row">
+      <div>
+        <label for="reduced-hour"><strong>Aplicar hora noturna reduzida</strong></label>
+        <p id="reduced-help">Converte cada 52 minutos e 30 segundos em uma hora noturna legal.</p>
+      </div>
+      <label class="switch">
+        <input id="reduced-hour" name="reducedHour" type="checkbox" checked aria-describedby="reduced-help" />
+        <span aria-hidden="true"></span>
+        <span class="sr-only">Aplicar hora noturna reduzida</span>
+      </label>
+    </div>
+
+    <details class="advanced">
+      <summary>Opções avançadas</summary>
+      <div class="advanced-content">
+        <div class="form-grid two-columns">
+          <div class="field">
+            <label for="night-start">Início do período noturno</label>
+            <input id="night-start" name="nightStart" type="time" value="22:00" />
+          </div>
+          <div class="field">
+            <label for="night-end">Fim do período noturno</label>
+            <input id="night-end" name="nightEnd" type="time" value="05:00" />
+          </div>
+          <div class="field">
+            <label for="overtime-hours">Horas extras noturnas no mês</label>
+            <input id="overtime-hours" name="overtimeHours" type="number" min="0" step="0.01" value="0" />
+          </div>
+          <div class="field">
+            <label for="overtime-percent">Adicional de hora extra</label>
+            <div class="input-suffix">
+              <input id="overtime-percent" name="overtimePercent" type="number" min="0" step="0.01" value="50" />
+              <span>%</span>
+            </div>
+          </div>
+        </div>
+        <label class="check-row">
+          <input id="include-extension" name="includeExtension" type="checkbox" />
+          <span>Incluir horas prorrogadas após o fim do período noturno</span>
+        </label>
+        <div class="field extension-field" id="extension-field" hidden>
+          <label for="extension-hours">Total de horas prorrogadas no mês</label>
+          <input id="extension-hours" name="extensionHours" type="number" min="0" step="0.01" value="0" />
+          <small>Informe somente quando a situação realmente se enquadrar. A prorrogação após 5h pode exigir análise da jornada completa, da norma coletiva e da jurisprudência.</small>
+        </div>
+        <p class="field-note">Convenções coletivas e regras da categoria podem alterar período, percentual, divisor e forma de cálculo.</p>
+      </div>
+    </details>
+
+    <div class="form-actions">
+      <button class="button primary-button" type="submit">Calcular</button>
+      <button class="button secondary-button" type="reset">Limpar</button>
+    </div>
+  </form>
+
+  <section id="result" class="result-panel" aria-live="polite" aria-labelledby="result-title" hidden>
+    <div class="result-lead">
+      <div>
+        <p>Adicional noturno estimado</p>
+        <h3 id="result-title">R$ 0,00</h3>
+      </div>
+      <p id="result-hours"></p>
+    </div>
+    <dl class="result-grid">
+      <div><dt>Hora normal</dt><dd id="result-hourly"></dd></div>
+      <div><dt>Adicional por hora noturna</dt><dd id="result-premium-hour"></dd></div>
+      <div><dt>Horas reais no período</dt><dd id="result-clock-hours"></dd></div>
+      <div><dt>Horas noturnas computadas</dt><dd id="result-converted-hours"></dd></div>
+      <div><dt>Percentual aplicado</dt><dd id="result-percent"></dd></div>
+      <div><dt>Divisor mensal</dt><dd id="result-divisor"></dd></div>
+      <div><dt>Turnos informados</dt><dd id="result-shifts"></dd></div>
+      <div><dt>Parcela de hora extra</dt><dd id="result-overtime"></dd></div>
+    </dl>
+    <div class="breakdown">
+      <h4>Memória do cálculo</h4>
+      <ol id="result-breakdown"></ol>
+      <p id="result-total-component" class="combined-result"></p>
+    </div>
+    <p class="result-caveat">Estimativa bruta. Reflexos, descontos, arredondamentos da folha e regras específicas não estão incluídos.</p>
+  </section>
+</section>
+
+<script>
+  import {
+    calculateNightPremium,
+    validateCalculatorInput,
+    type CalculatorInput
+  } from "../../lib/calculator";
+
+  const form = document.querySelector<HTMLFormElement>("#night-calculator")!;
+  const monthlyFields = document.querySelector<HTMLElement>("#monthly-fields")!;
+  const shiftFields = document.querySelector<HTMLElement>("#shift-fields")!;
+  const extensionCheckbox = document.querySelector<HTMLInputElement>("#include-extension")!;
+  const extensionField = document.querySelector<HTMLElement>("#extension-field")!;
+  const errorSummary = document.querySelector<HTMLElement>("#error-summary")!;
+  const resultPanel = document.querySelector<HTMLElement>("#result")!;
+
+  const input = (id: string) => document.querySelector<HTMLInputElement>(`#${id}`)!;
+  const select = (id: string) => document.querySelector<HTMLSelectElement>(`#${id}`)!;
+  const numberValue = (id: string) => Number(input(id).value);
+  const money = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+  const decimal = new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 2 });
+  const precise = new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 6 });
+
+  function parseBrazilianCurrency(value: string) {
+    const normalized = value.trim().replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+    return Number(normalized);
+  }
+
+  function updateMethod() {
+    const method = new FormData(form).get("method");
+    monthlyFields.hidden = method !== "monthly";
+    shiftFields.hidden = method !== "shift";
+  }
+
+  form.addEventListener("change", (event) => {
+    const target = event.target as HTMLInputElement;
+    if (target.name === "method") updateMethod();
+    if (target === extensionCheckbox) extensionField.hidden = !target.checked;
+  });
+
+  input("salary").addEventListener("blur", () => {
+    const value = parseBrazilianCurrency(input("salary").value);
+    if (Number.isFinite(value) && value >= 0) {
+      input("salary").value = value.toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+  });
+
+  function buildInput(): CalculatorInput {
+    const method = new FormData(form).get("method") as "monthly" | "shift";
+    return {
+      salary: parseBrazilianCurrency(input("salary").value),
+      divisor: numberValue("divisor"),
+      premiumPercent: numberValue("premium"),
+      method,
+      monthlyHours: numberValue("monthly-hours"),
+      monthlyHoursType: select("hours-type").value as "clock" | "converted",
+      shiftStart: input("shift-start").value,
+      shiftEnd: input("shift-end").value,
+      shifts: numberValue("shifts"),
+      nightStart: input("night-start").value,
+      nightEnd: input("night-end").value,
+      applyReducedHour: input("reduced-hour").checked,
+      includeExtension: extensionCheckbox.checked,
+      extensionHours: numberValue("extension-hours"),
+      overtimeNightHours: numberValue("overtime-hours"),
+      overtimePercent: numberValue("overtime-percent")
+    };
+  }
+
+  function showErrors(errors: string[]) {
+    const list = errorSummary.querySelector("ul")!;
+    list.replaceChildren(...errors.map((message) => {
+      const item = document.createElement("li");
+      item.textContent = message;
+      return item;
+    }));
+    errorSummary.hidden = false;
+    errorSummary.focus();
+  }
+
+  function setText(id: string, value: string) {
+    document.querySelector<HTMLElement>(`#${id}`)!.textContent = value;
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const values = buildInput();
+    const errors = validateCalculatorInput(values);
+    if (errors.length) {
+      resultPanel.hidden = true;
+      showErrors(errors);
+      return;
+    }
+
+    errorSummary.hidden = true;
+    const result = calculateNightPremium(values);
+    setText("result-title", money.format(result.nightPremium));
+    setText("result-hours", `${decimal.format(result.convertedNightHours)} horas consideradas`);
+    setText("result-hourly", money.format(result.hourlyRate));
+    setText("result-premium-hour", money.format(result.premiumPerHour));
+    setText("result-clock-hours", `${decimal.format(result.clockNightHours)} h`);
+    setText("result-converted-hours", `${decimal.format(result.convertedNightHours)} h`);
+    setText("result-percent", `${decimal.format(values.premiumPercent)}%`);
+    setText("result-divisor", decimal.format(values.divisor));
+    setText("result-shifts", values.method === "shift" ? String(result.shifts) : "Não se aplica");
+    setText("result-overtime", money.format(result.overtimePremium));
+
+    const breakdown = document.querySelector<HTMLOListElement>("#result-breakdown")!;
+    const lines = [
+      `${money.format(values.salary)} ÷ ${decimal.format(values.divisor)} = ${money.format(result.hourlyRate)} por hora normal`,
+      `${decimal.format(result.clockNightHours)} horas reais × ${precise.format(result.conversionFactor)} = ${decimal.format(result.convertedNightHours)} horas noturnas computadas`,
+      `${money.format(result.hourlyRate)} × ${decimal.format(values.premiumPercent)}% = ${money.format(result.premiumPerHour)} de adicional por hora`,
+      `${decimal.format(result.convertedNightHours)} × ${money.format(result.premiumPerHour)} = ${money.format(result.nightPremium)} de adicional noturno`
+    ];
+    if ((values.overtimeNightHours ?? 0) > 0) {
+      lines.push(
+        `Parcela extra sobre a base noturna: ${money.format(result.overtimePremium)}; componente completo das horas extras noturnas: ${money.format(result.overtimeComponent)}`
+      );
+    }
+    breakdown.replaceChildren(...lines.map((line) => {
+      const item = document.createElement("li");
+      item.textContent = line;
+      return item;
+    }));
+    setText(
+      "result-total-component",
+      result.overtimeComponent > 0
+        ? `Componente estimado total (adicional noturno + horas extras noturnas): ${money.format(result.totalComponent)}`
+        : ""
+    );
+    resultPanel.hidden = false;
+    resultPanel.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest" });
+  });
+
+  form.addEventListener("reset", () => {
+    setTimeout(() => {
+      updateMethod();
+      extensionField.hidden = true;
+      errorSummary.hidden = true;
+      resultPanel.hidden = true;
+    });
+  });
+</script>

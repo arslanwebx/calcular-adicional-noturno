@@ -1,0 +1,146 @@
+---
+const faqs = [
+  {
+    question: "Qual é o percentual do adicional noturno?",
+    answer:
+      "Para o empregado urbano sujeito à regra geral da CLT, o adicional é de pelo menos 20% sobre a hora diurna. Convenções e acordos coletivos podem prever percentual maior. Trabalhadores rurais, servidores e categorias especiais podem seguir regras diferentes."
+  },
+  {
+    question: "Como funciona a hora noturna de 52 minutos e 30 segundos?",
+    answer:
+      "Na regra urbana geral, cada período de 52 minutos e 30 segundos é computado como uma hora noturna. Por isso, sete horas reais entre 22h e 5h correspondem a oito horas noturnas para esse cálculo."
+  },
+  {
+    question: "Quem trabalha depois das 5h recebe adicional?",
+    answer:
+      "Pode receber em situações de prorrogação da jornada noturna. A Súmula 60 do TST trata da jornada integralmente cumprida no período noturno e prorrogada. Como a escala e a norma coletiva influenciam a análise, a opção da calculadora é manual e deve ser usada com cautela."
+  },
+  {
+    question: "O adicional noturno entra no cálculo das horas extras?",
+    answer:
+      "Quando a hora extra é prestada no período noturno, as parcelas podem se combinar. A calculadora separa o adicional noturno e o adicional de hora extra para deixar a estimativa compreensível, mas a rubrica final da folha pode seguir a convenção coletiva e o método do empregador."
+  },
+  {
+    question: "Trabalhador rural usa a mesma regra?",
+    answer:
+      "Não. A Lei nº 5.889/1973 define períodos noturnos diferentes para lavoura e pecuária e adicional de 25%. Os padrões desta ferramenta são voltados ao empregado urbano e precisam ser personalizados para uma simulação diferente."
+  },
+  {
+    question: "A convenção coletiva pode aumentar o percentual?",
+    answer:
+      "Sim. Uma norma coletiva pode estabelecer condição mais favorável, como percentual maior, e também pode detalhar divisor, horários e reflexos. Confira o instrumento vigente da sua categoria."
+  },
+  {
+    question: "Como conferir o cálculo no holerite?",
+    answer:
+      "Compare salário-base, divisor, quantidade de horas noturnas, percentual e eventual hora extra. Observe se as horas estão em formato real ou já reduzido. Diferenças pequenas podem vir de arredondamentos; diferenças relevantes merecem conferência com o setor de folha."
+  },
+  {
+    question: "A calculadora substitui o cálculo da empresa?",
+    answer:
+      "Não. Ela oferece uma estimativa informativa com os dados digitados no navegador. A folha considera contrato, ponto, norma coletiva, reflexos, descontos e regras específicas que não podem ser inferidos por uma ferramenta geral."
+  }
+];
+---
+
+<section class="content-section" aria-labelledby="what-is">
+  <div class="reading-width">
+    <h2 id="what-is">O que é adicional noturno?</h2>
+    <p>Adicional noturno é um acréscimo pago pelo trabalho realizado em horários definidos como noturnos pela legislação aplicável. Para a regra urbana geral da CLT, esse período vai das 22h de um dia às 5h do dia seguinte e o acréscimo mínimo é de 20% sobre o valor da hora diurna.</p>
+    <p>Há outra particularidade: a hora noturna urbana é computada como 52 minutos e 30 segundos. Isso altera a quantidade de horas remuneradas sem mudar o relógio. A base está no <a class="external-link" href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452compilado.htm#art73" target="_blank" rel="noopener noreferrer">artigo 73 da CLT <span class="sr-only">(abre em nova aba)</span></a>.</p>
+  </div>
+</section>
+
+<section class="content-section soft-section" aria-labelledby="how-tool-works">
+  <div class="container split-content">
+    <div>
+      <h2 id="how-tool-works">Como a estimativa é feita</h2>
+      <p>A ferramenta divide o salário-base pelo divisor mensal para encontrar a hora normal. Depois aplica o percentual noturno às horas computadas. Quando a redução está ativa, 60 minutos são divididos por 52,5, resultando no fator 1,142857.</p>
+      <p>Você pode informar o total do mês ou um turno. No segundo modo, a calculadora identifica apenas o trecho que coincide com o período noturno, inclusive quando a saída ocorre no dia seguinte.</p>
+    </div>
+    <div class="formula-card" aria-label="Resumo da fórmula">
+      <strong>Fórmula-base</strong>
+      <p>Hora normal = salário-base ÷ divisor</p>
+      <p>Horas reduzidas = horas reais × 1,142857</p>
+      <p>Adicional = horas reduzidas × hora normal × percentual</p>
+    </div>
+  </div>
+</section>
+
+<section class="content-section" aria-labelledby="reduced-hour">
+  <div class="reading-width">
+    <h2 id="reduced-hour">Por que a hora noturna é reduzida?</h2>
+    <p>Na regra urbana da CLT, sete horas reais entre 22h e 5h são computadas como oito horas noturnas. Um turno integral nesse intervalo continua durando sete horas no relógio, mas gera oito unidades legais de 52 minutos e 30 segundos.</p>
+    <p>Se o seu holerite ou controle de ponto já apresenta as horas convertidas, selecione “horas noturnas já convertidas”. Assim, a ferramenta não repete o fator. Esse cuidado resolve um erro comum: aplicar a redução duas vezes e superestimar o valor.</p>
+
+    <h3>Exemplo prático</h3>
+    <p>Considere salário-base de R$ 2.200, divisor 220, 35 horas reais no período noturno e adicional de 20%. A hora normal vale R$ 10. As 35 horas reais tornam-se 40 horas noturnas reduzidas. O adicional por hora é R$ 2 e a estimativa final é R$ 80.</p>
+    <div class="example-calculation">
+      <p><span>R$ 2.200 ÷ 220</span><strong>R$ 10 por hora</strong></p>
+      <p><span>35 h × 1,142857</span><strong>40 horas noturnas</strong></p>
+      <p><span>40 h × R$ 10 × 20%</span><strong>R$ 80 de adicional</strong></p>
+    </div>
+  </div>
+</section>
+
+<section class="content-section soft-section" aria-labelledby="different-rules">
+  <div class="reading-width">
+    <h2 id="different-rules">Quem pode ter regras diferentes?</h2>
+    <p>Os padrões da calculadora representam uma simulação urbana geral. Eles não são universais. Antes de comparar o resultado com a folha, identifique a categoria, o contrato e a norma coletiva aplicável.</p>
+    <div class="table-wrap">
+      <table>
+        <caption>Resumo geral de diferenças legais</caption>
+        <thead><tr><th>Grupo</th><th>Referência geral</th><th>O que verificar</th></tr></thead>
+        <tbody>
+          <tr><th>Urbano CLT</th><td>22h–5h, mínimo de 20%, hora de 52min30s</td><td>Convenção, divisor e prorrogação</td></tr>
+          <tr><th>Rural</th><td>Lavoura: 21h–5h; pecuária: 20h–4h; 25%</td><td>Atividade efetivamente exercida</td></tr>
+          <tr><th>Doméstico</th><td>Lei Complementar nº 150/2015</td><td>Registro de horário e contrato</td></tr>
+          <tr><th>Servidor ou categoria especial</th><td>Legislação própria</td><td>Estatuto, carreira e norma específica</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>A <a class="external-link" href="https://www.planalto.gov.br/ccivil_03/leis/l5889.htm#art7" target="_blank" rel="noopener noreferrer">lei do trabalho rural <span class="sr-only">(abre em nova aba)</span></a> usa períodos e percentual próprios. Para o emprego doméstico, consulte o <a class="external-link" href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp150.htm#art14" target="_blank" rel="noopener noreferrer">artigo 14 da Lei Complementar nº 150 <span class="sr-only">(abre em nova aba)</span></a>. A tabela é apenas um mapa inicial, não um enquadramento jurídico.</p>
+  </div>
+</section>
+
+<section class="content-section" aria-labelledby="payslip">
+  <div class="container split-content">
+    <div>
+      <h2 id="payslip">Como conferir o adicional no holerite</h2>
+      <p>Comece pelas informações que alimentam a conta. Use o espelho de ponto e a convenção coletiva junto do holerite, porque uma única rubrica nem sempre mostra todo o raciocínio.</p>
+      <ol class="check-list">
+        <li>Confirme o salário-base e o divisor mensal.</li>
+        <li>Veja se as horas estão em tempo real ou já convertidas.</li>
+        <li>Compare o percentual aplicado com a norma da categoria.</li>
+        <li>Separe horas noturnas normais, extras e prorrogações.</li>
+        <li>Observe reflexos e arredondamentos em rubricas distintas.</li>
+      </ol>
+    </div>
+    <aside class="attention-box">
+      <h3>Quando o valor pode mudar</h3>
+      <p>Escalas 12x36, trabalho misto, horas após 5h, intervalos, banco de horas e integração em outras verbas podem exigir uma análise além desta simulação.</p>
+      <p>Se houver diferença relevante, peça ao responsável pela folha a memória do cálculo e confira a convenção coletiva.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="content-section faq-section" aria-labelledby="faq-title">
+  <div class="reading-width">
+    <h2 id="faq-title">Dúvidas frequentes</h2>
+    <div class="faq-list">
+      {faqs.map((faq) => (
+        <details>
+          <summary>{faq.question}</summary>
+          <p>{faq.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="disclaimer-section" aria-labelledby="disclaimer-title">
+  <div class="reading-width">
+    <h2 id="disclaimer-title">Use o resultado como estimativa</h2>
+    <p>A calculadora não oferece aconselhamento jurídico ou contábil. Convenções coletivas, categoria profissional, horas extras, prorrogações após 5h, reflexos em outras verbas, regras internas da folha e interpretações judiciais podem alterar o valor. Para uma decisão trabalhista ou financeira, confirme os dados com o empregador, sindicato ou profissional habilitado.</p>
+  </div>
+</section>

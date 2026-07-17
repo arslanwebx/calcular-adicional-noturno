@@ -1,0 +1,42 @@
+---
+import { mainNavigation, siteConfig } from "../config/site";
+interface Props {
+  currentPath: string;
+}
+const { currentPath } = Astro.props;
+const isActive = (href: string) =>
+  href === "/" ? currentPath === "/" : currentPath.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label={`${siteConfig.name}, página inicial`}>
+      <svg aria-hidden="true" viewBox="0 0 40 40" width="36" height="36">
+        <path d="M25.5 5.5a15 15 0 1 0 9 24.5A13 13 0 0 1 25.5 5.5Z" fill="currentColor"/>
+        <path d="M13 23h14M16 18h8M17 28h6" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      <span>Adicional Noturno</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      {
+        mainNavigation.map((item) => (
+          <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <details class="mobile-nav">
+      <summary>Menu</summary>
+      <nav aria-label="Navegação móvel">
+        {
+          mainNavigation.map((item) => (
+            <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </details>
+  </div>
+</header>

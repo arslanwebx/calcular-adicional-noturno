@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Contato | Adicional Noturno";
+const description =
+  "Página de contato do site Adicional Noturno. O canal de envio está em fase de configuração.";
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/contato/">
+  <section class="page-hero">
+    <div class="reading-width">
+      <h1>Contato</h1>
+      <p>Use este espaço para organizar sua mensagem. O canal de envio ainda será configurado pelo responsável pelo site.</p>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="contact-layout container">
+      <div>
+        <h2>Antes de escrever</h2>
+        <p>Não inclua CPF, número de documento, senha, endereço ou dados completos do holerite. O site não analisa casos individuais nem substitui orientação jurídica ou contábil.</p>
+        <p>Enquanto não houver um endereço real ou serviço de formulário configurado, nenhuma mensagem pode ser enviada por esta página.</p>
+      </div>
+      <form class="contact-form" aria-describedby="contact-status">
+        <div class="field">
+          <label for="contact-name">Nome</label>
+          <input id="contact-name" name="name" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="contact-email">E-mail</label>
+          <input id="contact-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="contact-subject">Assunto</label>
+          <input id="contact-subject" name="subject" required />
+        </div>
+        <div class="field">
+          <label for="contact-message">Mensagem</label>
+          <textarea id="contact-message" name="message" rows="6" required></textarea>
+        </div>
+        <label class="check-row">
+          <input type="checkbox" name="acknowledgment" required />
+          <span>Confirmo que não incluí dados pessoais sensíveis na mensagem.</span>
+        </label>
+        <button class="button primary-button" type="submit" disabled>Envio ainda não configurado</button>
+        <p id="contact-status" class="field-note">O botão permanecerá desativado até que um serviço de envio compatível com Cloudflare e os dados reais do responsável sejam configurados.</p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>

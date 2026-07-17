@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#edf4f2"/>
+  <circle cx="1020" cy="90" r="210" fill="#dcebe7"/>
+  <rect x="90" y="90" width="1020" height="450" rx="36" fill="#fff"/>
+  <path d="M210 170a85 85 0 1 0 51 139 72 72 0 0 1-51-139Z" fill="#124e4a"/>
+  <path d="M180 253h110M199 220h72M207 286h56" stroke="#f4cf79" stroke-width="12" stroke-linecap="round"/>
+  <text x="350" y="245" font-family="Arial, sans-serif" font-size="54" font-weight="700" fill="#153b39">Calcular Adicional Noturno</text>
+  <text x="350" y="320" font-family="Arial, sans-serif" font-size="30" fill="#46615f">Estimativa clara, rápida e detalhada</text>
+  <rect x="350" y="370" width="310" height="74" rx="14" fill="#124e4a"/>
+  <text x="405" y="418" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#fff">Calcular agora</text>
+</svg>

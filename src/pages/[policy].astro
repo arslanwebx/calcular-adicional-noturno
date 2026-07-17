@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  const policies = {
+    "politica-de-privacidade": "Política de Privacidade",
+    "termos-de-uso": "Termos de Uso",
+    "aviso-legal": "Aviso Legal",
+    "politica-de-cookies": "Política de Cookies",
+    "politica-editorial": "Política Editorial"
+  } as const;
+  return Object.entries(policies).map(([policy, title]) => ({
+    params: { policy },
+    props: { title }
+  }));
+}
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+// Remove noindex only after the owner supplies and reviews the final policy text.
+---
+
+<BaseLayout
+  title={`${title} | Adicional Noturno`}
+  description={`${title} do site Adicional Noturno.`}
+  canonicalPath={`/${Astro.params.policy}/`}
+  noindex
+>
+  <section class="page-hero empty-policy">
+    <div class="reading-width">
+      <h1>{title}</h1>
+      <!-- Conteúdo principal intencionalmente vazio para edição posterior. -->
+    </div>
+  </section>
+</BaseLayout>

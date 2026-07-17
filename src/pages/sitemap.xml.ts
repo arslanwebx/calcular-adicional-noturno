@@ -3,6 +3,7 @@ import { siteConfig } from "../config/site";
 
 const indexableRoutes = [
   "/",
+  "/blog/",
   "/sobre/",
   "/contato/",
   "/politica-de-privacidade/",

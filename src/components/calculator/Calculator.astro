@@ -1,8 +1,8 @@
 <section class="calculator-shell" id="calculadora" aria-labelledby="calculator-title">
   <div class="calculator-heading">
     <div>
-      <h2 id="calculator-title">Calculadora de adicional noturno</h2>
-      <p>Preencha os dados da sua jornada. Os valores ficam somente neste navegador.</p>
+      <h2 id="calculator-title">Calcule o seu adicional noturno</h2>
+      <p>Comece com salário, divisor, percentual e horas noturnas. Use os demais campos somente se precisar deles.</p>
     </div>
     <span class="privacy-note">
       <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
@@ -19,7 +19,7 @@
     </div>
 
     <fieldset class="form-section">
-      <legend>Dados de remuneração</legend>
+      <legend>1. Informe os dados principais</legend>
       <div class="form-grid three-columns">
         <div class="field">
           <label for="salary">Salário-base mensal</label>
@@ -27,7 +27,7 @@
             <span>R$</span>
             <input id="salary" name="salary" inputmode="decimal" autocomplete="off" value="2.200,00" aria-describedby="salary-help" />
           </div>
-          <small id="salary-help">Use o salário-base, sem somar benefícios.</small>
+          <small id="salary-help">Informe o salário contratual usado como base, antes dos descontos. Não inclua benefícios ou verbas fora da base salarial.</small>
         </div>
         <div class="field">
           <label for="divisor">Jornada mensal (divisor)</label>
@@ -37,7 +37,7 @@
             <option value="200"></option>
             <option value="180"></option>
           </datalist>
-          <small id="divisor-help">Pode variar conforme contrato ou escala.</small>
+          <small id="divisor-help">É a quantidade de horas usada para encontrar a hora normal. O divisor 220 é comum, mas não vale para todos os contratos.</small>
         </div>
         <div class="field">
           <label for="premium">Percentual noturno</label>
@@ -45,21 +45,22 @@
             <input id="premium" name="premium" type="number" min="0" step="0.01" value="20" aria-describedby="premium-help" />
             <span>%</span>
           </div>
-          <small id="premium-help">20% é o mínimo da regra urbana geral.</small>
+          <small id="premium-help">A regra urbana geral prevê pelo menos 20%. Convenções e acordos coletivos podem definir percentual maior.</small>
         </div>
       </div>
     </fieldset>
 
     <fieldset class="form-section">
-      <legend>Como você quer informar a jornada?</legend>
+      <legend>2. Informe as horas noturnas</legend>
+      <p class="form-intro">Na maioria dos casos, informe o total de horas noturnas do mês. Escolha “por turno” apenas se quiser que a calculadora encontre as horas dentro do horário noturno.</p>
       <div class="segmented-control">
         <label>
           <input type="radio" name="method" value="monthly" checked />
-          <span>Total de horas no mês</span>
+          <span>Total mensal</span>
         </label>
         <label>
           <input type="radio" name="method" value="shift" />
-          <span>Entrada e saída por turno</span>
+          <span>Calcular por turno</span>
         </label>
       </div>
 
@@ -68,6 +69,7 @@
           <div class="field">
             <label for="monthly-hours">Total de horas noturnas</label>
             <input id="monthly-hours" name="monthlyHours" type="number" min="0" step="0.01" value="35" />
+            <small>Informe horas reais do relógio ou horas já convertidas, conforme a opção ao lado.</small>
           </div>
           <div class="field">
             <label for="hours-type">Como essas horas foram contadas?</label>
@@ -101,7 +103,7 @@
 
     <div class="toggle-row">
       <div>
-        <label for="reduced-hour"><strong>Aplicar hora noturna reduzida</strong></label>
+        <label for="reduced-hour"><strong>Hora noturna reduzida</strong></label>
         <p id="reduced-help">Converte cada 52 minutos e 30 segundos em uma hora noturna legal.</p>
       </div>
       <label class="switch">
@@ -125,7 +127,8 @@
           </div>
           <div class="field">
             <label for="overtime-hours">Horas extras noturnas no mês</label>
-            <input id="overtime-hours" name="overtimeHours" type="number" min="0" step="0.01" value="0" />
+            <input id="overtime-hours" name="overtimeHours" type="number" min="0" step="0.01" value="0" aria-describedby="overtime-hours-help" />
+            <small id="overtime-hours-help">Informe apenas as horas extras que não estão incluídas no total de horas noturnas acima.</small>
           </div>
           <div class="field">
             <label for="overtime-percent">Adicional de hora extra</label>
@@ -154,6 +157,17 @@
     </div>
   </form>
 
+  <aside class="calculation-rules" aria-labelledby="rules-title">
+    <h3 id="rules-title">Regras usadas neste cálculo</h3>
+    <ul>
+      <li><strong>Categoria:</strong> empregado urbano regido pela CLT</li>
+      <li><strong>Período noturno padrão:</strong> 22h às 5h</li>
+      <li><strong>Percentual e divisor:</strong> os valores informados no formulário</li>
+      <li><strong>Hora noturna reduzida:</strong> aplicada somente quando a opção estiver marcada</li>
+    </ul>
+    <p>Esta calculadora não seleciona automaticamente outras categorias. Para trabalho rural, doméstico ou regimes especiais, confira as regras específicas antes de usar os padrões urbanos.</p>
+  </aside>
+
   <section id="result" class="result-panel" aria-live="polite" aria-labelledby="result-title" hidden>
     <div class="result-lead">
       <div>
@@ -162,6 +176,7 @@
       </div>
       <p id="result-hours"></p>
     </div>
+    <p class="result-explanation">Este valor representa somente o adicional calculado sobre as horas noturnas. Ele não é o salário total do mês nem o pagamento completo dessas horas.</p>
     <dl class="result-grid">
       <div><dt>Hora normal</dt><dd id="result-hourly"></dd></div>
       <div><dt>Adicional por hora noturna</dt><dd id="result-premium-hour"></dd></div>
@@ -170,14 +185,14 @@
       <div><dt>Percentual aplicado</dt><dd id="result-percent"></dd></div>
       <div><dt>Divisor mensal</dt><dd id="result-divisor"></dd></div>
       <div><dt>Turnos informados</dt><dd id="result-shifts"></dd></div>
-      <div><dt>Parcela de hora extra</dt><dd id="result-overtime"></dd></div>
+      <div><dt>Adicional de hora extra noturna</dt><dd id="result-overtime"></dd></div>
     </dl>
     <div class="breakdown">
       <h4>Memória do cálculo</h4>
       <ol id="result-breakdown"></ol>
       <p id="result-total-component" class="combined-result"></p>
     </div>
-    <p class="result-caveat">Estimativa bruta. Reflexos, descontos, arredondamentos da folha e regras específicas não estão incluídos.</p>
+    <p class="result-caveat">A calculadora preserva a precisão nas etapas internas e arredonda somente os valores exibidos. Esta é uma estimativa bruta: reflexos, descontos, critérios de arredondamento da folha e regras específicas não estão incluídos.</p>
   </section>
 </section>
 
@@ -302,6 +317,7 @@
         `Parcela extra sobre a base noturna: ${money.format(result.overtimePremium)}; componente completo das horas extras noturnas: ${money.format(result.overtimeComponent)}`
       );
     }
+    lines.push("Os valores desta memória podem aparecer arredondados; o resultado foi calculado com a precisão interna completa.");
     breakdown.replaceChildren(...lines.map((line) => {
       const item = document.createElement("li");
       item.textContent = line;

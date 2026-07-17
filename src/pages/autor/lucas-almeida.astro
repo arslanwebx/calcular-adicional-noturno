@@ -4,8 +4,8 @@ import JsonLd from "../../components/JsonLd.astro";
 import { lucasAlmeida } from "../../config/authors";
 import { siteConfig } from "../../config/site";
 
-const title = "Lucas Almeida | Autor";
-const description = "Conheça Lucas Almeida, autor de guias informativos sobre adicional noturno e conferência do holerite.";
+const title = "Lucas Almeida | Autor sobre Adicional Noturno";
+const description = "Conheça Lucas Almeida, autor de guias claros sobre adicional noturno, hora reduzida e conferência do holerite.";
 ---
 
 <BaseLayout title={title} description={description} canonicalPath={lucasAlmeida.href}>
@@ -25,13 +25,30 @@ const description = "Conheça Lucas Almeida, autor de guias informativos sobre a
       <div class="author-avatar author-avatar-large" aria-hidden="true">{lucasAlmeida.initials}</div>
       <div>
         <h1>{lucasAlmeida.name}</h1>
-        <p>Autor de guias informativos sobre adicional noturno e conferência de valores trabalhistas.</p>
+        <p>Autor de guias claros sobre adicional noturno, hora reduzida e conferência do holerite.</p>
       </div>
     </div>
   </section>
   <section class="content-section">
     <div class="reading-width prose">
-      {lucasAlmeida.description.map((line) => <p>{line}</p>)}
+      <p class="author-lead">Lucas Almeida escreve para quem precisa entender o cálculo do adicional noturno sem depender de fórmulas escondidas ou explicações excessivamente jurídicas. O foco é transformar regras gerais em passos claros para leitura, conferência e comparação com a folha de pagamento.</p>
+
+      <div class="author-topic-grid">
+        <section>
+          <h2>O que você encontra aqui</h2>
+          <p>Os conteúdos mostram como identificar a hora normal, o divisor mensal, as horas noturnas e o percentual aplicável. Também explicam onde surgem dúvidas comuns, como a conversão da hora noturna reduzida, a hora extra e as jornadas que atravessam a madrugada.</p>
+        </section>
+        <section>
+          <h2>Como os guias são preparados</h2>
+          <p>Os artigos partem de textos legais e fontes institucionais, com atenção especial à CLT, à legislação de categorias específicas e a orientações do Tribunal Superior do Trabalho quando relevantes. O objetivo é informar com precisão sem transformar uma regra geral em resposta individual.</p>
+        </section>
+      </div>
+
+      <h2>Uma leitura útil para conferir a folha</h2>
+      <p>O adicional noturno costuma aparecer no holerite junto de outras rubricas, o que pode dificultar a conferência. Por isso, cada guia procura separar salário-base, horas computadas, adicional noturno, hora extra e possíveis diferenças de categoria. A calculadora do site complementa essa leitura com uma estimativa feita no navegador.</p>
+
+      <p>Quando contrato, escala, convenção coletiva ou prorrogação após 5h fazem diferença, os conteúdos indicam essa limitação com clareza. Para conhecer os critérios de pesquisa, atualização e correção, consulte a <a href="/politica-editorial/">Política Editorial</a>.</p>
+
       <h2>Artigos publicados</h2>
       <article class="author-article-link">
         <p class="article-meta">Atualizado em <time datetime="2026-07-17">17 de julho de 2026</time></p>

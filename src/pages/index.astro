@@ -5,19 +5,20 @@ import HomeContent from "../components/HomeContent.astro";
 import JsonLd from "../components/JsonLd.astro";
 import { siteConfig } from "../config/site";
 
-const title = "Calculadora de Adicional Noturno - [2026] Online e Grátis";
+const title = "Calcular Adicional Noturno: Calculadora Grátis";
 const description =
-  "Use esta calculadora de adicional noturno para calcular o valor conforme a CLT. Informe salário, jornada e percentual e obtenha uma estimativa em segundos.";
+  "Calcule o adicional noturno com salário, jornada, percentual e hora reduzida. Veja o resultado detalhado e entenda cada etapa.";
 
 const faqs = [
-  ["Qual é o percentual do adicional noturno?", "Para o empregado urbano sujeito à regra geral da CLT, o adicional é de pelo menos 20% sobre a hora diurna. Convenções e acordos coletivos podem prever percentual maior. Trabalhadores rurais, servidores e categorias especiais podem seguir regras diferentes."],
-  ["Como funciona a hora noturna de 52 minutos e 30 segundos?", "Na regra urbana geral, cada período de 52 minutos e 30 segundos é computado como uma hora noturna. Por isso, sete horas reais entre 22h e 5h correspondem a oito horas noturnas para esse cálculo."],
-  ["Quem trabalha depois das 5h recebe adicional?", "Pode receber em situações de prorrogação da jornada noturna. A Súmula 60 do TST trata da jornada integralmente cumprida no período noturno e prorrogada. Como a escala e a norma coletiva influenciam a análise, a opção da calculadora é manual e deve ser usada com cautela."],
-  ["O adicional noturno entra no cálculo das horas extras?", "Quando a hora extra é prestada no período noturno, as parcelas podem se combinar. A calculadora separa o adicional noturno e o adicional de hora extra para deixar a estimativa compreensível, mas a rubrica final da folha pode seguir a convenção coletiva e o método do empregador."],
-  ["Trabalhador rural usa a mesma regra?", "Não. A Lei nº 5.889/1973 define períodos noturnos diferentes para lavoura e pecuária e adicional de 25%. Os padrões desta ferramenta são voltados ao empregado urbano e precisam ser personalizados para uma simulação diferente."],
-  ["A convenção coletiva pode aumentar o percentual?", "Sim. Uma norma coletiva pode estabelecer condição mais favorável, como percentual maior, e também pode detalhar divisor, horários e reflexos. Confira o instrumento vigente da sua categoria."],
-  ["Como conferir o cálculo no holerite?", "Compare salário-base, divisor, quantidade de horas noturnas, percentual e eventual hora extra. Observe se as horas estão em formato real ou já reduzido. Diferenças pequenas podem vir de arredondamentos; diferenças relevantes merecem conferência com o setor de folha."],
-  ["A calculadora substitui o cálculo da empresa?", "Não. Ela oferece uma estimativa informativa com os dados digitados no navegador. A folha considera contrato, ponto, norma coletiva, reflexos, descontos e regras específicas que não podem ser inferidos por uma ferramenta geral."]
+  ["Qual é o percentual do adicional noturno?", "Na regra urbana geral da CLT, o adicional é de pelo menos 20% sobre a hora diurna. A convenção coletiva pode prever percentual maior."],
+  ["O divisor mensal é sempre 220?", "Não. O divisor depende da jornada e do contrato. Use o valor adotado pela sua folha ou confirmado na convenção coletiva."],
+  ["Como funciona a hora noturna reduzida?", "Na regra urbana geral, 52 minutos e 30 segundos são computados como uma hora noturna. Sete horas reais entre 22h e 5h correspondem a oito horas computadas."],
+  ["Posso informar horas já convertidas?", "Sim. Se o ponto ou o holerite já mostra horas noturnas reduzidas, escolha essa opção para evitar aplicar a conversão duas vezes."],
+  ["Quem trabalha depois das 5h recebe adicional?", "Pode receber quando houver prorrogação da jornada noturna. A jornada completa e a norma coletiva precisam ser conferidas antes de incluir essas horas."],
+  ["Adicional noturno entra na hora extra?", "Uma hora extra noturna pode envolver as duas parcelas. A forma de composição depende da norma coletiva e do método usado pela folha."],
+  ["Trabalhador rural usa a mesma regra?", "Não. A legislação rural prevê períodos noturnos e percentual próprios. Os padrões desta calculadora são urbanos."],
+  ["A convenção coletiva pode aumentar o percentual?", "Sim. Acordos e convenções coletivas podem trazer condição mais favorável, inclusive percentual maior ou regra própria de apuração."],
+  ["Como conferir o adicional no holerite?", "Compare salário-base, divisor, horas noturnas, percentual e rubricas de hora extra. O holerite, também chamado de contracheque, deve ser lido junto com o controle de ponto."]
 ];
 
 const schemas = [
@@ -65,8 +66,9 @@ const schemas = [
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-copy">
-        <h1>Calculadora de Adicional Noturno</h1>
-        <p class="hero-lead">Informe seu salário, divisor mensal e horas trabalhadas à noite para estimar o valor do adicional. A calculadora mostra cada etapa da conta e permite ajustar as regras da sua jornada.</p>
+        <h1>Calcular Adicional Noturno</h1>
+        <p class="hero-lead">Informe o salário mensal, a jornada, o percentual aplicável e as horas trabalhadas à noite. A calculadora mostra o valor da hora normal, as horas noturnas consideradas e o adicional noturno estimado.</p>
+        <p class="hero-privacy">O cálculo é feito neste navegador. Os dados informados não são enviados nem armazenados pelo site.</p>
         <a class="button primary-button" href="#calculadora">Ir para a calculadora</a>
       </div>
       <div class="hero-visual" aria-hidden="true">

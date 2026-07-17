@@ -96,15 +96,15 @@ export function nightOverlapMinutes(
 export function validateCalculatorInput(input: CalculatorInput): string[] {
   const errors: string[] = [];
   if (!Number.isFinite(input.salary) || input.salary <= 0)
-    errors.push("Informe um salário-base maior que zero.");
+    errors.push("Informe um salário maior que zero.");
   if (!Number.isFinite(input.divisor) || input.divisor <= 0)
-    errors.push("Informe um divisor mensal maior que zero.");
+    errors.push("Confira se a jornada mensal foi preenchida corretamente.");
   if (!Number.isFinite(input.premiumPercent) || input.premiumPercent < 0)
     errors.push("O percentual do adicional não pode ser negativo.");
 
   if (input.method === "monthly") {
     if (!Number.isFinite(input.monthlyHours) || (input.monthlyHours ?? 0) <= 0)
-      errors.push("Informe o total de horas noturnas do mês.");
+      errors.push("Informe a quantidade de horas noturnas.");
   } else {
     if (
       parseTime(input.shiftStart ?? "") === null ||
@@ -112,7 +112,7 @@ export function validateCalculatorInput(input: CalculatorInput): string[] {
     )
       errors.push("Informe horários de entrada e saída válidos.");
     if (input.shiftStart === input.shiftEnd)
-      errors.push("Entrada e saída não podem ter o mesmo horário.");
+      errors.push("Entrada e saída iguais não representam automaticamente um turno de 24 horas.");
     if (!Number.isInteger(input.shifts) || (input.shifts ?? 0) <= 0)
       errors.push("Informe uma quantidade válida de turnos.");
     const nightStart = input.nightStart ?? URBAN_DEFAULTS.nightStart;

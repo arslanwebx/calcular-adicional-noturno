@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { lucasAlmeida } from "../config/authors";
 
 const title = "Blog sobre Adicional Noturno";
 const description =
@@ -14,7 +15,7 @@ const description =
     </div>
   </section>
   <section class="content-section">
-    <div class="reading-width">
+    <div class="container blog-grid">
       <article class="blog-card">
         <a class="blog-card-image" href="/blog/como-calcular-adicional-noturno/" tabindex="-1" aria-hidden="true">
           <img
@@ -25,10 +26,10 @@ const description =
           />
         </a>
         <div class="blog-card-content">
-          <time datetime="2026-07-17">17 de julho de 2026</time>
+          <p class="article-meta">Atualizado em <time datetime="2026-07-17">17 de julho de 2026</time> · Por <a href={lucasAlmeida.href}>{lucasAlmeida.name}</a></p>
           <h2><a href="/blog/como-calcular-adicional-noturno/">Como Calcular Adicional Noturno Passo a Passo</a></h2>
           <p>Aprenda a encontrar o valor da hora normal, converter a hora noturna reduzida e aplicar o percentual com um exemplo completo.</p>
-          <a class="text-link" href="/blog/como-calcular-adicional-noturno/">Ler o guia completo</a>
+          <a class="text-link" href="/blog/como-calcular-adicional-noturno/">Leia mais →</a>
         </div>
       </article>
     </div>

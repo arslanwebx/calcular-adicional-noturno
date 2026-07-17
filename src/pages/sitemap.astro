@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { mainNavigation, policyNavigation } from "../config/site";
+
+const title = "Mapa do Site | Adicional Noturno";
+const description = "Encontre todas as páginas do site Adicional Noturno em um só lugar.";
+
+const contentLinks = [
+  {
+    href: "/blog/como-calcular-adicional-noturno/",
+    label: "Como Calcular Adicional Noturno Passo a Passo",
+    description: "Guia prático com fórmula, hora reduzida e exemplo de cálculo."
+  },
+  {
+    href: "/autor/lucas-almeida/",
+    label: "Lucas Almeida",
+    description: "Página do autor dos guias publicados no blog."
+  }
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/sitemap/">
+  <section class="page-hero sitemap-hero">
+    <div class="reading-width">
+      <h1>Mapa do site</h1>
+      <p>Encontre rapidamente as calculadoras, guias, páginas institucionais e políticas do site.</p>
+    </div>
+  </section>
+  <section class="content-section sitemap-content">
+    <div class="container sitemap-grid">
+      <section aria-labelledby="sitemap-main">
+        <h2 id="sitemap-main">Páginas principais</h2>
+        <ul>
+          {mainNavigation.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </section>
+      <section aria-labelledby="sitemap-guides">
+        <h2 id="sitemap-guides">Guias e autores</h2>
+        <ul>
+          {contentLinks.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+              <span>{item.description}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section aria-labelledby="sitemap-policies">
+        <h2 id="sitemap-policies">Políticas</h2>
+        <ul>
+          {policyNavigation.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </section>
+    </div>
+  </section>
+</BaseLayout>

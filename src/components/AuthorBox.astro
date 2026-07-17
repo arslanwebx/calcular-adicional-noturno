@@ -1,0 +1,13 @@
+---
+import { lucasAlmeida } from "../config/authors";
+---
+
+<aside class="author-box" aria-labelledby="author-box-title">
+  <div class="author-avatar" aria-hidden="true">{lucasAlmeida.initials}</div>
+  <div>
+    <p class="author-box-label">Sobre o autor</p>
+    <h2 id="author-box-title"><a href={lucasAlmeida.href}>{lucasAlmeida.name}</a></h2>
+    {lucasAlmeida.description.map((line) => <p>{line}</p>)}
+    <a class="text-link" href={lucasAlmeida.href}>Conheça o autor →</a>
+  </div>
+</aside>

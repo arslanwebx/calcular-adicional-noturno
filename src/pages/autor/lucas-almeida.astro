@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import { lucasAlmeida } from "../../config/authors";
+import { siteConfig } from "../../config/site";
+
+const title = "Lucas Almeida | Autor";
+const description = "Conheça Lucas Almeida, autor de guias informativos sobre adicional noturno e conferência do holerite.";
+---
+
+<BaseLayout title={title} description={description} canonicalPath={lucasAlmeida.href}>
+  <JsonLd data={{
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    name: title,
+    mainEntity: {
+      "@type": "Person",
+      name: lucasAlmeida.name,
+      url: `${siteConfig.url}${lucasAlmeida.href}`
+    },
+    inLanguage: "pt-BR"
+  }} />
+  <section class="page-hero author-page-hero">
+    <div class="reading-width author-page-intro">
+      <div class="author-avatar author-avatar-large" aria-hidden="true">{lucasAlmeida.initials}</div>
+      <div>
+        <h1>{lucasAlmeida.name}</h1>
+        <p>Autor de guias informativos sobre adicional noturno e conferência de valores trabalhistas.</p>
+      </div>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="reading-width prose">
+      {lucasAlmeida.description.map((line) => <p>{line}</p>)}
+      <h2>Artigos publicados</h2>
+      <article class="author-article-link">
+        <p class="article-meta">Atualizado em <time datetime="2026-07-17">17 de julho de 2026</time></p>
+        <h3><a href="/blog/como-calcular-adicional-noturno/">Como Calcular Adicional Noturno Passo a Passo</a></h3>
+        <p>Um guia para entender a fórmula, a hora noturna reduzida e a conferência do holerite.</p>
+        <a class="text-link" href="/blog/como-calcular-adicional-noturno/">Leia mais →</a>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

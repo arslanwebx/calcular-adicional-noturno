@@ -3,8 +3,10 @@ import { siteConfig } from "../config/site";
 
 const indexableRoutes = [
   "/",
+  "/sitemap/",
   "/blog/",
   "/blog/como-calcular-adicional-noturno/",
+  "/autor/lucas-almeida/",
   "/sobre/",
   "/contato/",
   "/politica-de-privacidade/",

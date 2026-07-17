@@ -52,52 +52,20 @@
 
     <fieldset class="form-section">
       <legend>2. Informe as horas noturnas</legend>
-      <p class="form-intro">Na maioria dos casos, informe o total de horas noturnas do mês. Escolha “por turno” apenas se quiser que a calculadora encontre as horas dentro do horário noturno.</p>
-      <div class="segmented-control">
-        <label>
-          <input type="radio" name="method" value="monthly" checked />
-          <span>Total mensal</span>
-        </label>
-        <label>
-          <input type="radio" name="method" value="shift" />
-          <span>Calcular por turno</span>
-        </label>
-      </div>
-
-      <div id="monthly-fields" class="method-fields">
-        <div class="form-grid two-columns">
-          <div class="field">
-            <label for="monthly-hours">Total de horas noturnas</label>
-            <input id="monthly-hours" name="monthlyHours" type="number" min="0" step="0.01" value="35" />
-            <small>Informe horas reais do relógio ou horas já convertidas, conforme a opção ao lado.</small>
-          </div>
-          <div class="field">
-            <label for="hours-type">Como essas horas foram contadas?</label>
-            <select id="hours-type" name="hoursType" aria-describedby="hours-type-help">
-              <option value="clock">Horas reais do relógio</option>
-              <option value="converted">Horas noturnas já convertidas</option>
-            </select>
-            <small id="hours-type-help">Evita aplicar a redução de 52min30s duas vezes.</small>
-          </div>
+      <div class="form-grid two-columns">
+        <div class="field">
+          <label for="monthly-hours">Total de horas noturnas no mês</label>
+          <input id="monthly-hours" name="monthlyHours" type="number" min="0" step="0.01" value="35" />
+          <small>Informe somente as horas trabalhadas entre 22h e 5h na regra urbana geral.</small>
         </div>
-      </div>
-
-      <div id="shift-fields" class="method-fields" hidden>
-        <div class="form-grid three-columns">
-          <div class="field">
-            <label for="shift-start">Entrada</label>
-            <input id="shift-start" name="shiftStart" type="time" value="22:00" />
-          </div>
-          <div class="field">
-            <label for="shift-end">Saída</label>
-            <input id="shift-end" name="shiftEnd" type="time" value="05:00" />
-          </div>
-          <div class="field">
-            <label for="shifts">Turnos no mês</label>
-            <input id="shifts" name="shifts" type="number" min="1" step="1" value="5" />
-          </div>
+        <div class="field">
+          <label for="hours-type">Essas horas estão em qual formato?</label>
+          <select id="hours-type" name="hoursType" aria-describedby="hours-type-help">
+            <option value="clock">Horas reais do relógio</option>
+            <option value="converted">Horas noturnas já convertidas</option>
+          </select>
+          <small id="hours-type-help">Escolha “já convertidas” somente se o ponto ou holerite já aplicou a hora reduzida.</small>
         </div>
-        <p class="field-note">O cálculo considera apenas a sobreposição do turno com o período noturno configurado.</p>
       </div>
     </fieldset>
 
@@ -114,17 +82,9 @@
     </div>
 
     <details class="advanced">
-      <summary>Opções avançadas</summary>
+      <summary>Adicionar hora extra noturna (opcional)</summary>
       <div class="advanced-content">
         <div class="form-grid two-columns">
-          <div class="field">
-            <label for="night-start">Início do período noturno</label>
-            <input id="night-start" name="nightStart" type="time" value="22:00" />
-          </div>
-          <div class="field">
-            <label for="night-end">Fim do período noturno</label>
-            <input id="night-end" name="nightEnd" type="time" value="05:00" />
-          </div>
           <div class="field">
             <label for="overtime-hours">Horas extras noturnas no mês</label>
             <input id="overtime-hours" name="overtimeHours" type="number" min="0" step="0.01" value="0" aria-describedby="overtime-hours-help" />
@@ -138,16 +98,7 @@
             </div>
           </div>
         </div>
-        <label class="check-row">
-          <input id="include-extension" name="includeExtension" type="checkbox" />
-          <span>Incluir horas prorrogadas após o fim do período noturno</span>
-        </label>
-        <div class="field extension-field" id="extension-field" hidden>
-          <label for="extension-hours">Total de horas prorrogadas no mês</label>
-          <input id="extension-hours" name="extensionHours" type="number" min="0" step="0.01" value="0" />
-          <small>Informe somente quando a situação realmente se enquadrar. A prorrogação após 5h pode exigir análise da jornada completa, da norma coletiva e da jurisprudência.</small>
-        </div>
-        <p class="field-note">Convenções coletivas e regras da categoria podem alterar período, percentual, divisor e forma de cálculo.</p>
+        <p class="field-note">Informe apenas horas extras noturnas que não estejam no total acima. Convenções e acordos coletivos podem alterar a forma de cálculo.</p>
       </div>
     </details>
 
@@ -184,7 +135,7 @@
       <div><dt>Horas noturnas computadas</dt><dd id="result-converted-hours"></dd></div>
       <div><dt>Percentual aplicado</dt><dd id="result-percent"></dd></div>
       <div><dt>Divisor mensal</dt><dd id="result-divisor"></dd></div>
-      <div><dt>Turnos informados</dt><dd id="result-shifts"></dd></div>
+      <div><dt>Hora reduzida</dt><dd id="result-reduced-hour"></dd></div>
       <div><dt>Adicional de hora extra noturna</dt><dd id="result-overtime"></dd></div>
     </dl>
     <div class="breakdown">
@@ -204,10 +155,6 @@
   } from "../../lib/calculator";
 
   const form = document.querySelector<HTMLFormElement>("#night-calculator")!;
-  const monthlyFields = document.querySelector<HTMLElement>("#monthly-fields")!;
-  const shiftFields = document.querySelector<HTMLElement>("#shift-fields")!;
-  const extensionCheckbox = document.querySelector<HTMLInputElement>("#include-extension")!;
-  const extensionField = document.querySelector<HTMLElement>("#extension-field")!;
   const errorSummary = document.querySelector<HTMLElement>("#error-summary")!;
   const resultPanel = document.querySelector<HTMLElement>("#result")!;
 
@@ -223,18 +170,6 @@
     return Number(normalized);
   }
 
-  function updateMethod() {
-    const method = new FormData(form).get("method");
-    monthlyFields.hidden = method !== "monthly";
-    shiftFields.hidden = method !== "shift";
-  }
-
-  form.addEventListener("change", (event) => {
-    const target = event.target as HTMLInputElement;
-    if (target.name === "method") updateMethod();
-    if (target === extensionCheckbox) extensionField.hidden = !target.checked;
-  });
-
   input("salary").addEventListener("blur", () => {
     const value = parseBrazilianCurrency(input("salary").value);
     if (Number.isFinite(value) && value >= 0) {
@@ -246,22 +181,15 @@
   });
 
   function buildInput(): CalculatorInput {
-    const method = new FormData(form).get("method") as "monthly" | "shift";
     return {
       salary: parseBrazilianCurrency(input("salary").value),
       divisor: numberValue("divisor"),
       premiumPercent: numberValue("premium"),
-      method,
+      method: "monthly",
       monthlyHours: numberValue("monthly-hours"),
       monthlyHoursType: select("hours-type").value as "clock" | "converted",
-      shiftStart: input("shift-start").value,
-      shiftEnd: input("shift-end").value,
-      shifts: numberValue("shifts"),
-      nightStart: input("night-start").value,
-      nightEnd: input("night-end").value,
       applyReducedHour: input("reduced-hour").checked,
-      includeExtension: extensionCheckbox.checked,
-      extensionHours: numberValue("extension-hours"),
+      includeExtension: false,
       overtimeNightHours: numberValue("overtime-hours"),
       overtimePercent: numberValue("overtime-percent")
     };
@@ -302,7 +230,7 @@
     setText("result-converted-hours", `${decimal.format(result.convertedNightHours)} h`);
     setText("result-percent", `${decimal.format(values.premiumPercent)}%`);
     setText("result-divisor", decimal.format(values.divisor));
-    setText("result-shifts", values.method === "shift" ? String(result.shifts) : "Não se aplica");
+    setText("result-reduced-hour", values.applyReducedHour ? "Aplicada" : "Não aplicada");
     setText("result-overtime", money.format(result.overtimePremium));
 
     const breakdown = document.querySelector<HTMLOListElement>("#result-breakdown")!;
@@ -335,8 +263,6 @@
 
   form.addEventListener("reset", () => {
     setTimeout(() => {
-      updateMethod();
-      extensionField.hidden = true;
       errorSummary.hidden = true;
       resultPanel.hidden = true;
     });

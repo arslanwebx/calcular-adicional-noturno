@@ -8,6 +8,7 @@ const year = new Date().getFullYear();
     <div>
       <a class="brand footer-brand" href="/">{siteConfig.name}</a>
       <p>Uma ferramenta informativa para entender estimativas de trabalho noturno.</p>
+      <a class="footer-email" href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
     </div>
     <nav aria-label="Links do site">
       <strong>Navegação</strong>
@@ -17,9 +18,51 @@ const year = new Date().getFullYear();
       <strong>Políticas</strong>
       {policyNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
+    <div class="newsletter">
+      <strong>Receba novidades</strong>
+      <p>Cadastre seu e-mail para receber novos conteúdos sobre adicional noturno e direitos trabalhistas.</p>
+      <form id="newsletter-form">
+        <label class="sr-only" for="newsletter-email">Seu e-mail</label>
+        <div class="newsletter-row">
+          <input id="newsletter-email" name="email" type="email" autocomplete="email" placeholder="Seu e-mail" required />
+          <button class="button newsletter-button" type="submit">Assinar</button>
+        </div>
+        <input class="honeypot" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <p id="newsletter-status" class="newsletter-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
   </div>
   <div class="container footer-bottom">
     <p>© {year} {siteConfig.name}.</p>
     <p>Os resultados são estimativas e não substituem a folha de pagamento nem orientação profissional.</p>
   </div>
 </footer>
+
+<script>
+  const newsletterForm = document.querySelector<HTMLFormElement>("#newsletter-form");
+  const newsletterStatus = document.querySelector<HTMLElement>("#newsletter-status");
+
+  newsletterForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!newsletterForm.reportValidity() || !newsletterStatus) return;
+    const button = newsletterForm.querySelector<HTMLButtonElement>("button")!;
+    button.disabled = true;
+    newsletterStatus.textContent = "Enviando...";
+    const data = Object.fromEntries(new FormData(newsletterForm));
+
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      const result = await response.json() as { message?: string };
+      newsletterStatus.textContent = result.message || "Não foi possível concluir a inscrição.";
+      if (response.ok) newsletterForm.reset();
+    } catch {
+      newsletterStatus.textContent = "Não foi possível conectar. Tente novamente mais tarde.";
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>

@@ -2,17 +2,22 @@
 
 Site estático em Astro para estimar o adicional noturno no navegador. O projeto não possui banco de dados, API de cálculo, analytics ou armazenamento dos valores digitados.
 
-## Antes de publicar
+## Domínio e contato
 
-O domínio ainda não foi informado. Defina `PUBLIC_SITE_URL` com a URL final, sem barra no fim. Enquanto a variável não for configurada, canonical, sitemap e dados estruturados usam `https://example.com`.
+O domínio padrão é `https://calculoadicionalnoturno.com`. Se o endereço final for diferente, defina `PUBLIC_SITE_URL` com a URL completa, sem barra no fim.
 
-Também permanecem pendentes:
+O formulário de contato e a newsletter enviam notificações para `contato@calculoadicionalnoturno.com` por meio da API do Resend. Antes de publicar:
 
-- conteúdo final das páginas de políticas;
-- dados reais do responsável pelo site;
-- um canal de contato e serviço de envio compatível com Cloudflare.
+1. valide `calculoadicionalnoturno.com` no Resend;
+2. crie uma chave de API;
+3. cadastre os segredos no projeto Cloudflare:
 
-As páginas de políticas têm `noindex, follow` e não entram no sitemap. Remova o `noindex` somente após revisar e publicar o conteúdo de cada uma.
+```bash
+npx wrangler secret put RESEND_API_KEY
+npx wrangler secret put CONTACT_FROM_EMAIL
+```
+
+Em `CONTACT_FROM_EMAIL`, use um remetente do domínio validado, por exemplo `Adicional Noturno <formularios@calculoadicionalnoturno.com>`. Nunca coloque a chave do Resend em arquivos versionados ou em variáveis públicas.
 
 ## Desenvolvimento
 
@@ -36,7 +41,7 @@ O build estático é gerado em `dist/`.
 
 ## Cloudflare
 
-Este repositório usa Wrangler Static Assets, sem Worker de aplicação. O arquivo `wrangler.jsonc` publica somente o diretório `dist/`, força URLs com barra final e usa o `404.html` gerado pelo Astro.
+Este repositório usa um Cloudflare Worker leve para os formulários e Wrangler Static Assets para o site. O arquivo `wrangler.jsonc` publica `dist/`, envia somente `/api/*` ao Worker, força URLs com barra final e usa o `404.html` gerado pelo Astro.
 
 Configuração para o painel:
 
@@ -44,7 +49,8 @@ Configuração para o painel:
 - Install command: `npm install` (ou o padrão detectado)
 - Build command: `npm run build`
 - Deploy command: `npx wrangler deploy`
-- Variável de ambiente: `PUBLIC_SITE_URL=https://seu-dominio.com.br`
+- Variável de build opcional: `PUBLIC_SITE_URL=https://calculoadicionalnoturno.com`
+- Segredos do Worker: `RESEND_API_KEY` e `CONTACT_FROM_EMAIL`
 
 Não configure um diretório de saída adicional no comando de deploy: o Wrangler lê `./dist` em `wrangler.jsonc`.
 
@@ -54,11 +60,12 @@ Para verificar a publicação:
 2. confira `/robots.txt` e `/sitemap.xml`;
 3. teste um endereço inexistente para confirmar a página 404;
 4. inspecione o canonical e os JSON-LD no HTML;
-5. calcule um cenário em um celular e em um desktop.
+5. envie uma mensagem de teste e uma inscrição de newsletter;
+6. calcule um cenário em um celular e em um desktop.
 
-## Formulário de contato
+## Formulários
 
-O formulário é apenas uma interface e o botão está desativado. Não afirme que há envio até configurar um endpoint real, proteção contra abuso, tratamento de consentimento e dados verdadeiros do responsável.
+Os endpoints `/api/contact` e `/api/newsletter` validam e limitam os campos, usam um campo-isca contra preenchimento automatizado e não expõem credenciais no navegador. Se os segredos ainda não estiverem configurados, retornam uma mensagem segura em vez de simular sucesso.
 
 ## Conteúdo futuro
 

@@ -1,37 +1,188 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../config/site";
 
 export function getStaticPaths() {
   const policies = {
-    "politica-de-privacidade": "Política de Privacidade",
-    "termos-de-uso": "Termos de Uso",
-    "aviso-legal": "Aviso Legal",
-    "politica-de-cookies": "Política de Cookies",
-    "politica-editorial": "Política Editorial"
-  } as const;
-  return Object.entries(policies).map(([policy, title]) => ({
+    "politica-de-privacidade": {
+      title: "Política de Privacidade",
+      description: "Saiba como o site Adicional Noturno trata dados pessoais, mensagens de contato e inscrições na newsletter."
+    },
+    "termos-de-uso": {
+      title: "Termos de Uso",
+      description: "Consulte as condições de uso da calculadora e dos conteúdos do site Adicional Noturno."
+    },
+    "aviso-legal": {
+      title: "Aviso Legal",
+      description: "Entenda os limites informativos, jurídicos e técnicos da calculadora de adicional noturno."
+    },
+    "politica-de-cookies": {
+      title: "Política de Cookies",
+      description: "Veja quais tecnologias locais e cookies podem ser usados no site Adicional Noturno."
+    },
+    "politica-editorial": {
+      title: "Política Editorial",
+      description: "Conheça os critérios de pesquisa, redação, revisão e atualização do conteúdo do site."
+    }
+  };
+  return Object.entries(policies).map(([policy, data]) => ({
     params: { policy },
-    props: { title }
+    props: { policy, ...data }
   }));
 }
 
 interface Props {
+  policy: string;
   title: string;
+  description: string;
 }
-const { title } = Astro.props;
-// Remove noindex only after the owner supplies and reviews the final policy text.
+const { policy, title, description } = Astro.props;
 ---
 
 <BaseLayout
   title={`${title} | Adicional Noturno`}
-  description={`${title} do site Adicional Noturno.`}
-  canonicalPath={`/${Astro.params.policy}/`}
-  noindex
+  description={description}
+  canonicalPath={`/${policy}/`}
 >
-  <section class="page-hero empty-policy">
+  <section class="page-hero policy-hero">
     <div class="reading-width">
       <h1>{title}</h1>
-      <!-- Conteúdo principal intencionalmente vazio para edição posterior. -->
+      <p>Última atualização: 17 de julho de 2026.</p>
     </div>
   </section>
+
+  <article class="content-section policy-content">
+    <div class="reading-width prose">
+      {policy === "politica-de-privacidade" && (
+        <>
+          <p>Esta Política de Privacidade explica como o site Adicional Noturno trata informações fornecidas por visitantes. Nosso compromisso é coletar somente o necessário para manter os canais solicitados pelo usuário, com linguagem clara e sem comercializar dados pessoais.</p>
+
+          <h2>Dados usados pela calculadora</h2>
+          <p>Os valores informados na calculadora, como salário-base, divisor, horários e quantidade de horas, são processados no próprio navegador. Esses dados não são enviados ao nosso servidor, não são associados a uma conta e não são armazenados pelo site. Ao atualizar ou fechar a página, os campos deixam de fazer parte da sessão, salvo recursos normais do próprio navegador, como o preenchimento automático controlado pelo usuário.</p>
+
+          <h2>Formulário de contato</h2>
+          <p>Quando você envia uma mensagem, tratamos nome, endereço de e-mail, assunto e conteúdo para receber a solicitação e responder. O envio é encaminhado ao endereço {siteConfig.contactEmail} por um provedor de entrega de e-mail configurado no ambiente da Cloudflare. Não envie documentos, senhas, dados bancários, CPF, informações médicas ou cópias integrais de holerites.</p>
+          <p>A base para esse tratamento é a iniciativa do próprio titular ao solicitar contato e o interesse legítimo em manter um canal de comunicação seguro. As mensagens podem ser conservadas pelo tempo necessário para responder, registrar correções editoriais e cumprir obrigações legítimas, sendo eliminadas quando deixarem de ser úteis.</p>
+
+          <h2>Newsletter</h2>
+          <p>Ao cadastrar seu e-mail no rodapé, você solicita o recebimento de futuras novidades do site. O endereço é encaminhado ao responsável para inclusão na lista de comunicação. O cadastro não autoriza o envio por terceiros nem o uso para finalidades incompatíveis. Cada comunicação deverá oferecer um meio simples de cancelamento, e você também pode pedir a remoção escrevendo para nosso contato.</p>
+
+          <h2>Fornecedores e transferências</h2>
+          <p>Usamos infraestrutura da Cloudflare para hospedar e proteger o site e um serviço de entrega de e-mail para encaminhar formulários. Esses fornecedores podem processar dados técnicos, como endereço IP, cabeçalhos da requisição, registros de segurança e informações necessárias à entrega. O tratamento pode envolver servidores em outros países, com as salvaguardas adotadas pelos respectivos fornecedores.</p>
+
+          <h2>Segurança e direitos do titular</h2>
+          <p>Aplicamos validação de campos, limite de tamanho, conexão HTTPS e mecanismos contra preenchimento automatizado. Nenhum sistema, entretanto, é imune a falhas. Nos termos da legislação aplicável, você pode solicitar confirmação do tratamento, acesso, correção, eliminação quando cabível, informação sobre compartilhamento e revogação de consentimento.</p>
+
+          <h2>Como falar sobre privacidade</h2>
+          <p>Para exercer direitos, pedir exclusão de uma mensagem ou tirar dúvidas, escreva para <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>. Poderemos solicitar informações mínimas para confirmar a identidade e evitar que dados sejam entregues a terceiros.</p>
+        </>
+      )}
+
+      {policy === "termos-de-uso" && (
+        <>
+          <p>Estes Termos de Uso estabelecem as condições para acessar a calculadora, os textos e os demais recursos do site Adicional Noturno. Ao navegar ou utilizar a ferramenta, você declara ter compreendido que o serviço possui finalidade exclusivamente informativa.</p>
+
+          <h2>Finalidade da calculadora</h2>
+          <p>A ferramenta ajuda a estimar o adicional noturno com base nos valores digitados. Os padrões iniciais representam a regra urbana geral da CLT, mas podem não corresponder ao contrato, à categoria ou à situação concreta do usuário. O resultado não constitui folha de pagamento, parecer jurídico, laudo contábil ou promessa de valor devido.</p>
+
+          <h2>Responsabilidade do usuário</h2>
+          <p>Você é responsável por conferir salário-base, divisor mensal, percentual, jornada, período noturno, horas extras e qualquer ajuste aplicado. Antes de tomar uma decisão, compare a estimativa com o registro de ponto, o contrato de trabalho, a convenção coletiva e as rubricas do holerite. Em caso de dúvida relevante, procure o setor de pessoal, o sindicato ou um profissional habilitado.</p>
+
+          <h2>Uso permitido</h2>
+          <p>O site pode ser usado gratuitamente para consultas pessoais, acadêmicas ou profissionais legítimas. Não é permitido tentar interromper o serviço, explorar falhas, contornar medidas de segurança, sobrecarregar os formulários, inserir código malicioso, coletar dados de outros visitantes ou apresentar o resultado como certificação oficial.</p>
+
+          <h2>Conteúdo e propriedade intelectual</h2>
+          <p>A estrutura visual, os textos originais, a marca, os elementos gráficos e o código autoral são protegidos pela legislação aplicável. É permitido citar pequenos trechos para fins informativos com indicação clara da fonte e link para a página correspondente. A reprodução integral, a republicação automatizada ou a criação de cópias destinadas a confundir usuários depende de autorização.</p>
+
+          <h2>Disponibilidade e alterações</h2>
+          <p>Buscamos manter o site acessível e correto, mas não garantimos funcionamento ininterrupto. Recursos podem ser ajustados para corrigir erros, melhorar segurança, acompanhar alterações legais ou adequar a infraestrutura. Estes termos também podem ser atualizados; a data no início da página identifica a versão vigente.</p>
+
+          <h2>Links e serviços externos</h2>
+          <p>Algumas páginas apontam para fontes oficiais ou serviços de terceiros. Esses destinos têm políticas próprias e podem mudar sem controle do site. A presença de um link serve para contextualização e não representa endosso irrestrito.</p>
+
+          <h2>Contato</h2>
+          <p>Dúvidas sobre estes termos podem ser enviadas para <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>.</p>
+        </>
+      )}
+
+      {policy === "aviso-legal" && (
+        <>
+          <p>O site Adicional Noturno foi criado para facilitar a compreensão de uma estimativa trabalhista. Este aviso delimita o alcance das informações apresentadas e ajuda o visitante a interpretar o resultado com responsabilidade.</p>
+
+          <h2>Informação geral, não aconselhamento individual</h2>
+          <p>Os conteúdos não substituem orientação jurídica, contábil, sindical ou de recursos humanos. A legislação trabalhista possui exceções e pode ser complementada por convenções coletivas, acordos, regulamentos profissionais, regimes estatutários e decisões judiciais. Sem conhecer documentos e fatos específicos, o site não pode concluir se determinado valor é efetivamente devido.</p>
+
+          <h2>Premissas do cálculo</h2>
+          <p>Por padrão, a calculadora adota salário mensal dividido pelo divisor informado, adicional de 20%, período entre 22h e 5h e hora noturna reduzida de 52 minutos e 30 segundos. Essas referências se relacionam à regra urbana geral da CLT. Trabalhadores rurais, empregados domésticos, servidores públicos e categorias especiais podem estar sujeitos a normas próprias.</p>
+          <p>As opções de personalização existem para simulações, mas não confirmam o enquadramento jurídico do usuário. Desativar a hora reduzida, alterar o período ou incluir prorrogações deve ser uma escolha consciente baseada na norma aplicável.</p>
+
+          <h2>Horas extras, prorrogações e reflexos</h2>
+          <p>A combinação entre adicional noturno e hora extra pode variar conforme a forma de cálculo adotada na folha e a norma coletiva. O trabalho após o fim do período noturno também depende da jornada realizada e da interpretação aplicável. Reflexos em descanso semanal, férias, décimo terceiro, FGTS, aviso-prévio e outras verbas não são automaticamente apurados pela estimativa principal.</p>
+
+          <h2>Precisão e atualização</h2>
+          <p>Empregamos fórmulas transparentes e testes de software para reduzir erros, inclusive em turnos que atravessam a meia-noite. Ainda assim, entradas incorretas, arredondamentos, mudanças legislativas e particularidades da folha podem produzir diferenças. Não garantimos identidade entre a estimativa e o valor final de um empregador ou processo judicial.</p>
+
+          <h2>Decisões e possíveis prejuízos</h2>
+          <p>O usuário não deve assinar acordos, deixar de cumprir obrigações, formular cobranças ou tomar decisões financeiras apenas com base nesta ferramenta. Sempre confirme os documentos e procure auxílio apropriado quando o tema puder afetar direitos, prazos ou renda.</p>
+
+          <h2>Correções</h2>
+          <p>Se você identificar erro técnico, referência desatualizada ou explicação imprecisa, envie os detalhes e, se possível, a fonte oficial para <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>. Correções relevantes serão avaliadas conforme nossa Política Editorial.</p>
+        </>
+      )}
+
+      {policy === "politica-de-cookies" && (
+        <>
+          <p>Esta Política de Cookies descreve as tecnologias que podem armazenar ou acessar informações no dispositivo durante a navegação. O objetivo é diferenciar recursos necessários ao funcionamento de mecanismos de publicidade ou rastreamento.</p>
+
+          <h2>Situação atual do site</h2>
+          <p>Atualmente, a calculadora não precisa de cookies para realizar contas e não salva salário, jornada ou resultados em armazenamento local. Também não utilizamos cookies próprios de publicidade, remarketing ou personalização comportamental. Por esse motivo, não exibimos um banner de consentimento apenas para criar uma etapa desnecessária.</p>
+
+          <h2>O que são cookies</h2>
+          <p>Cookies são pequenos registros enviados por um site e mantidos pelo navegador por determinado período. Eles podem lembrar preferências, preservar uma sessão, reforçar segurança ou medir uso. Tecnologias semelhantes incluem armazenamento local, pixels, identificadores e registros técnicos de rede.</p>
+
+          <h2>Infraestrutura e segurança</h2>
+          <p>A Cloudflare hospeda e protege o site. Em situações específicas, a infraestrutura pode utilizar cookies ou sinais técnicos estritamente necessários para distinguir tráfego legítimo de acessos automatizados, aplicar medidas contra abuso e entregar as páginas com segurança. Esses mecanismos são controlados pelo fornecedor e não servem para armazenar os dados digitados na calculadora.</p>
+
+          <h2>Formulários e newsletter</h2>
+          <p>O envio de contato e a inscrição na newsletter acontecem por requisições seguras ao servidor. Os formulários não dependem de cookies publicitários. Registros técnicos podem ser processados temporariamente para prevenção de fraude, diagnóstico de falhas e entrega da mensagem, conforme explicado na Política de Privacidade.</p>
+
+          <h2>Como controlar cookies</h2>
+          <p>Os navegadores permitem visualizar, bloquear e apagar cookies. O bloqueio total pode afetar recursos de segurança da plataforma, embora a calculadora principal continue projetada para funcionar sem armazenamento persistente. Consulte as configurações de privacidade do navegador utilizado para fazer sua escolha.</p>
+
+          <h2>Mudanças futuras</h2>
+          <p>Se forem adicionadas ferramentas de análise, publicidade ou outros recursos não essenciais, esta política será atualizada antes da ativação. Quando exigido, o site também apresentará controles de consentimento adequados. Não adicionaremos um mecanismo de rastreamento silencioso incompatível com esta descrição.</p>
+
+          <h2>Dúvidas</h2>
+          <p>Para perguntar sobre tecnologias utilizadas no site, entre em contato pelo e-mail <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>.</p>
+        </>
+      )}
+
+      {policy === "politica-editorial" && (
+        <>
+          <p>A Política Editorial define como pesquisamos, escrevemos, revisamos e atualizamos informações sobre adicional noturno. Nosso propósito é transformar regras técnicas em explicações úteis sem inventar autoridade, simplificar além do razoável ou esconder limitações.</p>
+
+          <h2>Prioridade para fontes oficiais</h2>
+          <p>Afirmações legais importantes devem partir, sempre que possível, do texto publicado no Portal Planalto, de materiais oficiais do Ministério do Trabalho e Emprego e de decisões, súmulas ou notícias institucionais dos tribunais. Fontes secundárias podem ajudar a identificar dúvidas do público, mas não são tratadas como autoridade principal quando a norma original está disponível.</p>
+
+          <h2>Clareza e contexto</h2>
+          <p>Escrevemos em português brasileiro direto, explicando termos como divisor mensal, hora reduzida e prorrogação. Evitamos promessas de precisão absoluta e deixamos claro quando a regra urbana geral não alcança todas as categorias. Exemplos numéricos são identificados como simulações, e seus resultados devem coincidir com a fórmula apresentada.</p>
+
+          <h2>Separação de intenções</h2>
+          <p>A página inicial prioriza a tarefa de calcular uma estimativa e oferece apenas o contexto necessário para interpretar o resultado. Futuros artigos poderão aprofundar perguntas específicas, sem duplicar artificialmente a mesma palavra-chave ou criar páginas vazias para mecanismos de busca. Cada conteúdo deverá responder a uma necessidade distinta e apontar para a calculadora quando isso ajudar o leitor.</p>
+
+          <h2>Originalidade e integridade</h2>
+          <p>Os textos são redigidos de forma original após consulta às fontes. Não copiamos longos trechos de leis, concorrentes ou materiais protegidos para preencher páginas. Não publicamos depoimentos, especialistas, estatísticas, avaliações ou credenciais inventadas. Conteúdo patrocinado, se algum dia existir, deverá ser identificado com clareza e não poderá determinar conclusões jurídicas.</p>
+
+          <h2>Revisão e atualização</h2>
+          <p>Alterações legislativas, mudanças relevantes de jurisprudência e relatos fundamentados de erro motivam revisão. A data de atualização deve refletir uma modificação editorial real, não apenas uma nova execução do sistema de publicação. Correções que mudem significativamente o sentido do conteúdo devem ser feitas com prioridade.</p>
+
+          <h2>Uso de automação</h2>
+          <p>Ferramentas automatizadas podem apoiar organização, testes e revisão, mas o conteúdo final precisa obedecer aos critérios de fonte, coerência e responsabilidade desta política. Nenhuma automação deve criar citação inexistente, conclusão jurídica personalizada ou texto repetitivo destinado apenas a aumentar volume.</p>
+
+          <h2>Envio de correções</h2>
+          <p>Leitores podem relatar erros pelo e-mail <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>. Inclua o endereço da página, o trecho questionado e uma fonte verificável. Toda sugestão será avaliada editorialmente, sem garantia de adoção automática.</p>
+        </>
+      )}
+    </div>
+  </article>
 </BaseLayout>

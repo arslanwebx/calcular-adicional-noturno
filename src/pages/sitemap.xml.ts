@@ -1,7 +1,16 @@
 import type { APIRoute } from "astro";
 import { siteConfig } from "../config/site";
 
-const indexableRoutes = ["/", "/sobre/", "/contato/"];
+const indexableRoutes = [
+  "/",
+  "/sobre/",
+  "/contato/",
+  "/politica-de-privacidade/",
+  "/termos-de-uso/",
+  "/aviso-legal/",
+  "/politica-de-cookies/",
+  "/politica-editorial/"
+];
 
 export const GET: APIRoute = () => {
   const urls = indexableRoutes

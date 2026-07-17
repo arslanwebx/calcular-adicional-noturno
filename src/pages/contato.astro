@@ -1,26 +1,27 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../config/site";
 
 const title = "Contato | Adicional Noturno";
 const description =
-  "Página de contato do site Adicional Noturno. O canal de envio está em fase de configuração.";
+  "Entre em contato com o site Adicional Noturno para enviar dúvidas, sugestões ou correções.";
 ---
 
 <BaseLayout title={title} description={description} canonicalPath="/contato/">
   <section class="page-hero">
     <div class="reading-width">
       <h1>Contato</h1>
-      <p>Use este espaço para organizar sua mensagem. O canal de envio ainda será configurado pelo responsável pelo site.</p>
+      <p>Envie dúvidas, sugestões de pauta ou correções sobre o site. Respondemos pelo e-mail informado no formulário.</p>
     </div>
   </section>
   <section class="content-section">
     <div class="contact-layout container">
       <div>
-        <h2>Antes de escrever</h2>
-        <p>Não inclua CPF, número de documento, senha, endereço ou dados completos do holerite. O site não analisa casos individuais nem substitui orientação jurídica ou contábil.</p>
-        <p>Enquanto não houver um endereço real ou serviço de formulário configurado, nenhuma mensagem pode ser enviada por esta página.</p>
+        <h2>Fale conosco</h2>
+        <p>Você também pode escrever diretamente para <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>.</p>
+        <p>Não envie CPF, documentos, senhas, endereço ou cópia completa do holerite. O site não presta consultoria jurídica individual.</p>
       </div>
-      <form class="contact-form" aria-describedby="contact-status">
+      <form id="contact-form" class="contact-form" aria-describedby="contact-status">
         <div class="field">
           <label for="contact-name">Nome</label>
           <input id="contact-name" name="name" autocomplete="name" required />
@@ -39,11 +40,41 @@ const description =
         </div>
         <label class="check-row">
           <input type="checkbox" name="acknowledgment" required />
-          <span>Confirmo que não incluí dados pessoais sensíveis na mensagem.</span>
+          <span>Confirmo que li o aviso acima e não incluí dados pessoais sensíveis.</span>
         </label>
-        <button class="button primary-button" type="submit" disabled>Envio ainda não configurado</button>
-        <p id="contact-status" class="field-note">O botão permanecerá desativado até que um serviço de envio compatível com Cloudflare e os dados reais do responsável sejam configurados.</p>
+        <input class="honeypot" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <button class="button primary-button" type="submit">Enviar mensagem</button>
+        <p id="contact-status" class="form-status" role="status" aria-live="polite">Os dados serão usados somente para responder à sua mensagem.</p>
       </form>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("#contact-form");
+  const status = document.querySelector<HTMLElement>("#contact-status");
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity() || !status) return;
+    const button = form.querySelector<HTMLButtonElement>("button[type='submit']")!;
+    button.disabled = true;
+    status.textContent = "Enviando sua mensagem...";
+    const data = Object.fromEntries(new FormData(form));
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      const result = await response.json() as { message?: string };
+      status.textContent = result.message || "Não foi possível enviar a mensagem.";
+      if (response.ok) form.reset();
+    } catch {
+      status.textContent = "Não foi possível conectar. Tente novamente mais tarde.";
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>

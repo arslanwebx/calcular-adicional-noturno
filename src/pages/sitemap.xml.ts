@@ -5,6 +5,7 @@ const indexableRoutes = [
   "/",
   "/sitemap/",
   "/blog/",
+  "/blog/adicional-noturno-clt/",
   "/blog/como-calcular-adicional-noturno/",
   "/autor/lucas-almeida/",
   "/sobre/",
@@ -16,11 +17,15 @@ const indexableRoutes = [
   "/politica-editorial/"
 ];
 
+const routeLastModified: Record<string, string> = {
+  "/blog/adicional-noturno-clt/": "2026-07-24"
+};
+
 export const GET: APIRoute = () => {
   const urls = indexableRoutes
     .map(
       (path) =>
-        `<url><loc>${siteConfig.url}${path}</loc><lastmod>${siteConfig.contentModified}</lastmod></url>`
+        `<url><loc>${siteConfig.url}${path}</loc><lastmod>${routeLastModified[path] || siteConfig.contentModified}</lastmod></url>`
     )
     .join("");
   return new Response(

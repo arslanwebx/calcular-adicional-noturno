@@ -1,0 +1,204 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import AuthorBox from "../../components/AuthorBox.astro";
+import { lucasAlmeida } from "../../config/authors";
+import { siteConfig } from "../../config/site";
+
+const title = "Adicional Noturno CLT: Artigo 73, Horário e Regras";
+const h1 = "Adicional Noturno CLT: O Que Diz o Artigo 73";
+const description =
+  "Entenda o adicional noturno na CLT, o artigo 73, o horário das 22h às 5h, a hora reduzida, o percentual e as principais exceções.";
+const canonicalPath = "/blog/adicional-noturno-clt/";
+const articleUrl = `${siteConfig.url}${canonicalPath}`;
+const imageUrl = `${siteConfig.url}/adicional-noturno-clt-artigo-73.jpg`;
+const publishedDate = "2026-07-24";
+const publishedIso = "2026-07-24T09:00:00-03:00";
+
+const faqs = [
+  {
+    question: "O que diz o artigo 73 da CLT?",
+    answer:
+      "O artigo 73 determina remuneração superior para o trabalho noturno urbano, com adicional mínimo de 20% sobre a hora diurna. Também define a hora noturna como 52 minutos e 30 segundos e o período geral entre 22h e 5h."
+  },
+  {
+    question: "Como funciona o adicional noturno na CLT?",
+    answer:
+      "O trabalhador recebe um acréscimo sobre a hora diurna pelas horas alcançadas pelo período noturno. Na regra urbana geral, o mínimo é 20%, e a quantidade pode ser afetada pela hora noturna reduzida."
+  },
+  {
+    question: "Quantas horas noturnas existem das 22h às 5h?",
+    answer:
+      "O intervalo possui sete horas reais no relógio, mas corresponde a oito horas noturnas legais porque cada hora é computada como 52 minutos e 30 segundos."
+  },
+  {
+    question: "O que diz o artigo 59 da CLT?",
+    answer:
+      "O artigo 59 trata da prorrogação da jornada e das horas extras, incluindo limites e formas de acordo ou compensação. O adicional noturno urbano é regulado principalmente pelo artigo 73."
+  },
+  {
+    question: "O adicional noturno começa às 18h?",
+    answer:
+      "Não pela regra urbana geral da CLT. O período normalmente começa às 22h. Um horário diferente depende de norma específica, instrumento coletivo ou regime aplicável à categoria."
+  },
+  {
+    question: "Qual é o percentual do adicional noturno rural?",
+    answer:
+      "A Lei nº 5.889/1973 prevê adicional de 25% para o trabalho rural noturno, com períodos distintos para lavoura e pecuária."
+  },
+  {
+    question: "Quem trabalha em escala 12x36 recebe adicional noturno?",
+    answer:
+      "Pode receber pelas horas dentro do período noturno aplicável. É preciso separar os trechos da jornada e verificar hora reduzida, prorrogação após 5h e norma coletiva."
+  },
+  {
+    question: "A convenção coletiva pode aumentar o adicional?",
+    answer:
+      "Sim. O artigo 73 fixa um mínimo de 20% para a regra urbana geral, mas uma convenção ou um acordo coletivo pode prever condição mais favorável."
+  }
+];
+
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: h1,
+    description,
+    image: imageUrl,
+    datePublished: publishedDate,
+    dateModified: publishedDate,
+    author: { "@type": "Person", name: lucasAlmeida.name, url: `${siteConfig.url}${lucasAlmeida.href}` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
+    inLanguage: "pt-BR"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer }
+    }))
+  }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  breadcrumbs={[{ name: "Início", path: "/" }, { name: "Blog", path: "/blog/" }, { name: h1, path: canonicalPath }]}
+  image="/adicional-noturno-clt-artigo-73.jpg"
+  ogType="article"
+  publishedTime={publishedIso}
+  modifiedTime={publishedIso}
+>
+  <JsonLd data={schemas} />
+  <article class="article-page">
+    <header class="article-header">
+      <div class="reading-width">
+        <nav class="breadcrumbs" aria-label="Navegação estrutural">
+          <ol>
+            <li><a href="/">Início</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li aria-current="page">Adicional noturno CLT</li>
+          </ol>
+        </nav>
+        <h1>{h1}</h1>
+        <p class="article-intro">O que diz o artigo 73, horários, percentual e exemplos.</p>
+        <div class="article-dates">
+          <span>Publicado em <time datetime={publishedDate}>24 de julho de 2026</time></span>
+          <span>Por <a href={lucasAlmeida.href}>{lucasAlmeida.name}</a></span>
+        </div>
+      </div>
+    </header>
+
+    <div class="reading-width article-body">
+      <img class="article-featured-image" src="/adicional-noturno-clt-artigo-73.jpg" width="1500" height="1000" alt="Ilustração com relógio noturno, CLT, artigo 73 e regras do adicional noturno." />
+
+      <p>O adicional noturno na CLT é o acréscimo devido, na regra geral urbana, pelo trabalho realizado entre 22h e 5h. O artigo 73 estabelece remuneração superior à hora diurna, adicional mínimo de 20% e a chamada hora noturna reduzida, computada como 52 minutos e 30 segundos.</p>
+      <p>Em termos práticos, quem trabalha nesse período pode receber mais por hora e ter sete horas reais, das 22h às 5h, contabilizadas como oito horas noturnas. Para fazer uma estimativa com os dados da sua jornada, use a <a href="/#calculadora">calculadora de adicional noturno</a>.</p>
+      <p>Essas são regras gerais para empregados urbanos submetidos à CLT. Convenções coletivas, trabalho rural, emprego doméstico, serviço público e categorias especiais podem adotar horários, percentuais ou critérios diferentes.</p>
+
+      <h2>O que diz o artigo 73 da CLT?</h2>
+      <p>O artigo 73 da Consolidação das Leis do Trabalho é a principal base legal do adicional noturno para empregados urbanos. Ele determina que o trabalho noturno tenha remuneração superior à do trabalho diurno e fixa um acréscimo mínimo de 20% sobre a hora diurna.</p>
+      <p>O dispositivo também define a hora noturna como 52 minutos e 30 segundos e considera noturno, para essa regra, o trabalho executado entre 22h de um dia e 5h do dia seguinte.</p>
+      <p>A redação atual pode ser conferida diretamente no texto compilado da CLT no <a class="external-link" href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452compilado.htm#art73" target="_blank" rel="noopener noreferrer">Portal da Legislação <span class="sr-only">(abre em nova aba)</span></a>. A consulta à fonte oficial é importante porque resumos não substituem o texto legal completo.</p>
+      <div class="article-formula" aria-label="Resumo do artigo 73 da CLT"><p><strong>Resumo do artigo 73:</strong> 22h às 5h, adicional de pelo menos 20% e hora noturna urbana de 52min30s.</p></div>
+
+      <h2>Como funciona o adicional noturno na CLT?</h2>
+      <p>O adicional não substitui o salário normal. Ele é uma parcela acrescida à remuneração das horas alcançadas pela regra noturna. Primeiro existe o valor normal da hora; depois é aplicado o percentual noturno correspondente.</p>
+      <p>Na regra urbana mínima, uma hora diurna de R$ 10 gera R$ 2 de adicional noturno. A remuneração relacionada àquela hora passa a considerar a hora normal e o acréscimo, sem prejuízo de outras parcelas que possam existir, como hora extra.</p>
+      <p>A conta real da folha depende de três pontos que costumam causar diferença:</p>
+      <ul>
+        <li>qual é o divisor mensal correto para encontrar o salário-hora;</li>
+        <li>se o controle de ponto apresenta horas reais ou horas noturnas já convertidas;</li>
+        <li>se a convenção coletiva prevê percentual superior a 20% ou uma regra específica.</li>
+      </ul>
+      <p>Para ver a fórmula e uma memória de cálculo completa, consulte o guia <a href="/blog/como-calcular-adicional-noturno/">como calcular adicional noturno passo a passo</a>. Este artigo permanece focado na regra legal e no enquadramento da CLT.</p>
+
+      <h2>Quantas horas noturnas existem das 22h às 5h?</h2>
+      <p>Das 22h às 5h existem sete horas reais no relógio. Porém, como cada hora noturna urbana é computada como 52 minutos e 30 segundos, esse intervalo completo corresponde a oito horas noturnas legais.</p>
+      <p>A conversão pode ser entendida assim: 420 minutos reais divididos por 52,5 minutos resultam em 8 horas noturnas. Por isso, contar apenas sete horas sem verificar a redução pode diminuir a quantidade usada no cálculo.</p>
+      <div class="table-wrap article-table"><table><caption>Conversão do período noturno urbano</caption><thead><tr><th>Período</th><th>Tempo real</th><th>Horas noturnas computadas</th></tr></thead><tbody><tr><td>22h às 5h</td><td>7 horas</td><td>8 horas</td></tr><tr><td>22h às 1h30</td><td>3h30</td><td>4 horas</td></tr><tr><td>1 hora real</td><td>60 minutos</td><td>aprox. 1h08min34s em unidades decimais</td></tr></tbody></table></div>
+      <img class="article-featured-image article-inline-image" src="/periodo-noturno-urbano-22h-5h.png" width="1400" height="600" loading="lazy" alt="Linha do tempo do período noturno urbano das 22h às 5h, equivalente a oito horas noturnas." />
+      <p>A última linha é apenas uma equivalência matemática. Sistemas de ponto podem registrar cada fração de forma própria e aplicar arredondamentos previstos na rotina da folha. Antes de converter, verifique se as horas já aparecem como “noturnas reduzidas”.</p>
+
+      <h2>Qual é o percentual do adicional noturno?</h2>
+      <p>Para o empregado urbano submetido à regra geral da CLT, o adicional noturno é de, no mínimo, 20% sobre o valor da hora diurna. A expressão “no mínimo” é importante: uma convenção ou um acordo coletivo pode estabelecer percentual maior.</p>
+      <p>Portanto, não é seguro aplicar 20% automaticamente em qualquer situação. O percentual do adicional noturno deve ser comparado com a norma coletiva vigente, o contrato e eventuais regras específicas da categoria.</p>
+
+      <h2>Adicional noturno começa a partir das 18 horas?</h2>
+      <p>Em regra, não para o empregado urbano abrangido pelo artigo 73 da CLT. O período noturno urbano geral começa às 22h, e não às 18h.</p>
+      <p>O horário das 18h pode aparecer em escalas internas, estatutos, contratos ou instrumentos coletivos específicos, mas isso não transforma automaticamente todo trabalho após as 18h em adicional noturno pela regra geral da CLT.</p>
+      <p>Também é necessário separar o empregado urbano do trabalhador rural. Na lavoura, o período legal vai das 21h às 5h; na pecuária, das 20h às 4h. Nenhuma dessas regras gerais começa às 18h.</p>
+
+      <h2>Adicional noturno rural segue a CLT?</h2>
+      <p>O trabalhador rural possui regra específica na Lei nº 5.889/1973. O trabalho noturno é considerado entre 21h e 5h na lavoura e entre 20h e 4h na atividade pecuária, com acréscimo de 25% sobre a remuneração normal.</p>
+      <p>Por isso, usar automaticamente o período urbano das 22h às 5h e o percentual de 20% pode gerar uma estimativa errada para uma atividade rural.</p>
+      <p>Consulte a <a class="external-link" href="https://www.planalto.gov.br/ccivil_03/leis/l5889.htm" target="_blank" rel="noopener noreferrer">Lei nº 5.889/1973 no Planalto <span class="sr-only">(abre em nova aba)</span></a> para verificar a regra rural diretamente na fonte oficial.</p>
+      <img class="article-featured-image article-inline-image" src="/adicional-noturno-urbano-rural.png" width="1400" height="780" loading="lazy" alt="Comparação entre adicional noturno urbano e rural, incluindo horários e percentuais." />
+
+      <h2>Como fica o adicional noturno na escala 12x36?</h2>
+      <p>A escala 12x36 não elimina o adicional noturno. As horas trabalhadas dentro do período noturno aplicável continuam exigindo a análise do percentual, da hora reduzida e da norma coletiva.</p>
+      <p>Uma jornada das 19h às 7h, por exemplo, atravessa período diurno, período noturno e horas posteriores às 5h. Não se deve aplicar o adicional a todas as 12 horas sem separar os trechos e verificar se as horas após 5h caracterizam prorrogação da jornada noturna.</p>
+      <p>A CLT admite o regime 12x36 por acordo individual escrito, convenção coletiva ou acordo coletivo, conforme o artigo 59-A. Entretanto, a forma de pagamento e a prorrogação noturna podem depender do contexto do contrato e da jurisprudência aplicável.</p>
+
+      <h2>O que diz o artigo 59 da CLT?</h2>
+      <p>O artigo 59 da CLT trata principalmente da prorrogação da jornada e das horas extras. Em regra, ele permite acrescentar até duas horas extras à jornada diária por acordo individual, convenção coletiva ou acordo coletivo, observados os requisitos legais.</p>
+      <p>Ele não é a base principal do adicional noturno. Para o trabalho noturno urbano, a referência central é o artigo 73. O artigo 59 passa a ser relevante quando a jornada noturna também ultrapassa a duração normal, gerando discussão sobre hora extra, compensação ou banco de horas.</p>
+      <p>Em uma hora extra prestada durante o período noturno, podem coexistir o adicional noturno e o adicional de hora extra. A base e a forma de composição precisam respeitar a legislação e a norma coletiva aplicável; simplesmente somar percentuais pode não reproduzir a folha.</p>
+
+      <h2>Exemplo simples com a regra mínima da CLT</h2>
+      <p>Considere salário mensal de R$ 2.200, divisor 220, adicional de 20% e sete horas reais trabalhadas integralmente entre 22h e 5h.</p>
+      <ol><li>Valor da hora normal: R$ 2.200 ÷ 220 = R$ 10.</li><li>Conversão do período: 7 horas reais = 8 horas noturnas.</li><li>Adicional por hora: R$ 10 × 20% = R$ 2.</li><li>Total estimado do adicional: 8 × R$ 2 = R$ 16.</li></ol>
+      <p>O valor de R$ 16 representa somente o acréscimo noturno desse exemplo. O pagamento total da jornada também contém a remuneração normal das horas e pode envolver horas extras, reflexos e outras rubricas.</p>
+
+      <h2>Quando o valor pode ser diferente?</h2>
+      <ul><li>Convenção coletiva com percentual superior a 20%.</li><li>Divisor mensal diferente de 220.</li><li>Horas já convertidas pelo sistema de ponto.</li><li>Jornada prorrogada após 5h.</li><li>Horas extras dentro do período noturno.</li><li>Escala 12x36 ou jornada mista.</li><li>Trabalho rural, doméstico, público ou categoria com legislação própria.</li><li>Arredondamentos, faltas, intervalos e mês trabalhado parcialmente.</li></ul>
+      <p>Quando houver diferença relevante entre a estimativa e o holerite, peça a memória do cálculo ao setor de folha e confira o instrumento coletivo da categoria. Em uma controvérsia trabalhista, procure o sindicato ou um profissional habilitado.</p>
+
+      <h2>Como conferir o adicional noturno no holerite</h2>
+      <ol start="5"><li>Confira o salário-base usado naquele mês.</li><li>Identifique o divisor mensal da jornada.</li><li>Compare o número de horas noturnas com o espelho de ponto.</li><li>Veja se as horas estão em tempo real ou já reduzidas.</li><li>Confirme o percentual aplicado.</li><li>Separe adicional noturno, hora extra noturna e eventual prorrogação.</li><li>Compare a conta com a convenção ou o acordo coletivo vigente.</li></ol>
+      <p>Diferenças de centavos podem ocorrer por arredondamento. Uma diferença maior, especialmente quando se repete por vários meses, merece conferência detalhada.</p>
+
+      <h2>Resumo: adicional noturno CLT</h2>
+      <p>O adicional noturno CLT para o empregado urbano está previsto principalmente no artigo 73. A regra geral considera o período das 22h às 5h, exige acréscimo mínimo de 20% e computa cada hora noturna como 52 minutos e 30 segundos.</p>
+      <p>Das 22h às 5h existem sete horas reais, equivalentes a oito horas noturnas. O artigo 59, por sua vez, trata das horas extras e se torna relevante quando a jornada noturna ultrapassa o limite normal.</p>
+      <p>Como percentuais, horários e formas de cálculo podem mudar por categoria, a melhor conferência combina contrato, ponto, holerite, norma coletiva e fontes oficiais.</p>
+
+      <h2>Fontes externas recomendadas no artigo</h2>
+      <ul>
+        <li><a class="external-link" href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452compilado.htm" target="_blank" rel="noopener noreferrer">CLT compilada — Decreto-Lei nº 5.452/1943 <span class="sr-only">(abre em nova aba)</span></a>: fonte oficial para os artigos 59, 59-A e 73.</li>
+        <li><a class="external-link" href="https://www.planalto.gov.br/ccivil_03/leis/l5889.htm" target="_blank" rel="noopener noreferrer">Lei nº 5.889/1973 <span class="sr-only">(abre em nova aba)</span></a>: fonte oficial para trabalho rural noturno.</li>
+        <li><a class="external-link" href="https://www.tst.jus.br/" target="_blank" rel="noopener noreferrer">Tribunal Superior do Trabalho <span class="sr-only">(abre em nova aba)</span></a>: referência institucional para jurisprudência e orientações trabalhistas.</li>
+      </ul>
+
+      <h2>Dúvidas frequentes</h2>
+      <div class="faq-list article-faq">{faqs.map((faq) => <details><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div>
+
+      <aside class="article-disclaimer"><h2>Informação importante</h2><p>Este conteúdo é informativo e apresenta regras gerais. Ele não substitui a análise do contrato, da convenção coletiva, da folha de pagamento ou a orientação jurídica e contábil adequada ao caso concreto.</p></aside>
+      <AuthorBox />
+    </div>
+  </article>
+</BaseLayout>

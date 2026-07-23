@@ -8,7 +8,7 @@ const description =
   "Conheça o objetivo e a metodologia da calculadora informativa de adicional noturno.";
 ---
 
-<BaseLayout title={title} description={description} canonicalPath="/sobre/">
+<BaseLayout title={title} description={description} canonicalPath="/sobre/" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Sobre este site", path: "/sobre/" }]}>
   <JsonLd data={{
     "@context": "https://schema.org",
     "@type": "AboutPage",

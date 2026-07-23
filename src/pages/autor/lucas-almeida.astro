@@ -8,7 +8,7 @@ const title = "Lucas Almeida | Autor sobre Adicional Noturno";
 const description = "Conheça Lucas Almeida, autor de guias claros sobre adicional noturno, hora reduzida e conferência do holerite.";
 ---
 
-<BaseLayout title={title} description={description} canonicalPath={lucasAlmeida.href}>
+<BaseLayout title={title} description={description} canonicalPath={lucasAlmeida.href} breadcrumbs={[{ name: "Início", path: "/" }, { name: lucasAlmeida.name, path: lucasAlmeida.href }]}>
   <JsonLd data={{
     "@context": "https://schema.org",
     "@type": "ProfilePage",

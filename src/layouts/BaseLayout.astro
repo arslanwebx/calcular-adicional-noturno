@@ -1,8 +1,14 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import JsonLd from "../components/JsonLd.astro";
 import { siteConfig } from "../config/site";
 import "../styles/global.css";
+
+interface Breadcrumb {
+  name: string;
+  path: string;
+}
 
 interface Props {
   title: string;
@@ -13,6 +19,7 @@ interface Props {
   ogType?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
+  breadcrumbs?: Breadcrumb[];
 }
 
 const {
@@ -23,10 +30,33 @@ const {
   image = "/og-calculadora.svg",
   ogType = "website",
   publishedTime,
-  modifiedTime
+  modifiedTime,
+  breadcrumbs
 } = Astro.props;
 const canonical = new URL(canonicalPath, `${siteConfig.url}/`).toString();
 const socialImage = new URL(image, `${siteConfig.url}/`).toString();
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${siteConfig.url}/#organization`,
+    name: siteConfig.name,
+    url: `${siteConfig.url}/`,
+    email: siteConfig.contactEmail
+  },
+  ...(breadcrumbs
+    ? [{
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: breadcrumb.name,
+          item: new URL(breadcrumb.path, `${siteConfig.url}/`).toString()
+        }))
+      }]
+    : [])
+];
 ---
 
 <!doctype html>
@@ -67,6 +97,7 @@ const socialImage = new URL(image, `${siteConfig.url}/`).toString();
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <Header currentPath={Astro.url.pathname} />
     <main id="conteudo" tabindex="-1">
+      <JsonLd data={structuredData} />
       <slot />
     </main>
     <Footer />

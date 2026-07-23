@@ -8,6 +8,22 @@ interface Env {
 
 const CONTACT_EMAIL = "contato@calculoadicionalnoturno.com";
 const MAX_BODY_BYTES = 24_000;
+const HSTS_VALUE = "max-age=31536000; includeSubDomains";
+
+function withSecurityHeaders(response: Response) {
+  const headers = new Headers(response.headers);
+  headers.set("Strict-Transport-Security", HSTS_VALUE);
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers
+  });
+}
+
+function needsTrailingSlash(pathname: string) {
+  if (pathname === "/" || pathname.endsWith("/") || pathname.startsWith("/api/")) return false;
+  return !pathname.split("/").at(-1)?.includes(".");
+}
 
 function json(message: string, status = 200) {
   return Response.json(
@@ -16,7 +32,8 @@ function json(message: string, status = 200) {
       status,
       headers: {
         "Cache-Control": "no-store",
-        "X-Content-Type-Options": "nosniff"
+        "X-Content-Type-Options": "nosniff",
+        "Strict-Transport-Security": HSTS_VALUE
       }
     }
   );
@@ -158,6 +175,11 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
+    if ((request.method === "GET" || request.method === "HEAD") && needsTrailingSlash(url.pathname)) {
+      url.pathname = `${url.pathname}/`;
+      return withSecurityHeaders(Response.redirect(url, 308));
+    }
+
     if (request.method === "POST" && url.pathname === "/api/contact") {
       return handleContact(request, env);
     }
@@ -167,6 +189,6 @@ export default {
     if (url.pathname.startsWith("/api/")) {
       return json("Endpoint não encontrado.", 404);
     }
-    return env.ASSETS.fetch(request);
+    return withSecurityHeaders(await env.ASSETS.fetch(request));
   }
 };

@@ -43,6 +43,7 @@ const { policy, title, description } = Astro.props;
   title={`${title} | Adicional Noturno`}
   description={description}
   canonicalPath={`/${policy}/`}
+  breadcrumbs={[{ name: "Início", path: "/" }, { name: title, path: `/${policy}/` }]}
 >
   <section class="page-hero policy-hero">
     <div class="reading-width">

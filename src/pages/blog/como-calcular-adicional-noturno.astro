@@ -73,15 +73,6 @@ const schemas = [
   },
   {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Início", item: `${siteConfig.url}/` },
-      { "@type": "ListItem", position: 2, name: "Blog", item: `${siteConfig.url}/blog/` },
-      { "@type": "ListItem", position: 3, name: h1, item: articleUrl }
-    ]
-  },
-  {
-    "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
@@ -96,6 +87,7 @@ const schemas = [
   title={title}
   description={description}
   canonicalPath={canonicalPath}
+  breadcrumbs={[{ name: "Início", path: "/" }, { name: "Blog", path: "/blog/" }, { name: h1, path: canonicalPath }]}
   image="/como-calcular-adicional-noturno.svg"
   ogType="article"
   publishedTime={publishedIso}

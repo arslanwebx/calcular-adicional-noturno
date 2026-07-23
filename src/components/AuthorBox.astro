@@ -3,7 +3,7 @@ import { lucasAlmeida } from "../config/authors";
 ---
 
 <aside class="author-box" aria-labelledby="author-box-title">
-  <div class="author-avatar" aria-hidden="true">{lucasAlmeida.initials}</div>
+  <img class="author-avatar" src={lucasAlmeida.image} width="800" height="800" alt={`Retrato de ${lucasAlmeida.name}`} />
   <div>
     <p class="author-box-label">Sobre o autor</p>
     <h2 id="author-box-title"><a href={lucasAlmeida.href}>{lucasAlmeida.name}</a></h2>

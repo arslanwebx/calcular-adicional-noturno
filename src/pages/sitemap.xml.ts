@@ -5,6 +5,7 @@ const indexableRoutes = [
   "/",
   "/sitemap/",
   "/blog/",
+  "/blog/quem-tem-direito-ao-adicional-noturno/",
   "/blog/adicional-noturno-clt/",
   "/blog/como-calcular-adicional-noturno/",
   "/autor/lucas-almeida/",
@@ -18,6 +19,7 @@ const indexableRoutes = [
 ];
 
 const routeLastModified: Record<string, string> = {
+  "/blog/quem-tem-direito-ao-adicional-noturno/": "2026-07-27",
   "/blog/adicional-noturno-clt/": "2026-07-24"
 };
 

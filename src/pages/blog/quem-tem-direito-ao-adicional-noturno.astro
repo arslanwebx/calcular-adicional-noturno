@@ -1,0 +1,111 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import AuthorBox from "../../components/AuthorBox.astro";
+import { lucasAlmeida } from "../../config/authors";
+import { siteConfig } from "../../config/site";
+
+const title = "Quem Tem Direito ao Adicional Noturno? Regras e Exceções";
+const h1 = "Quem Tem Direito ao Adicional Noturno?";
+const description =
+  "Quem tem direito ao adicional noturno? Entenda os horários para trabalho urbano, rural e doméstico, as exceções e como conferir o pagamento.";
+const canonicalPath = "/blog/quem-tem-direito-ao-adicional-noturno/";
+const articleUrl = `${siteConfig.url}${canonicalPath}`;
+const imageUrl = `${siteConfig.url}/quem-tem-direito-adicional-noturno.webp`;
+const publishedDate = "2026-07-27";
+const publishedIso = "2026-07-27T09:00:00-03:00";
+
+const faqs = [
+  { question: "Quem trabalha das 22h às 5h tem direito ao adicional noturno?", answer: "Em regra, sim, quando existe relação de emprego e o trabalhador urbano ou doméstico presta serviço nesse intervalo. O adicional incide sobre as horas efetivamente trabalhadas e a convenção coletiva pode prever condição mais favorável." },
+  { question: "Quem trabalha só uma parte da noite recebe?", answer: "Sim. Não é necessário cumprir todo o período noturno. Um empregado urbano que trabalha até 23h, por exemplo, pode receber o adicional referente ao trecho das 22h às 23h." },
+  { question: "Quem trabalha em escala 12x36 tem direito?", answer: "Sim, pelas horas da escala que coincidirem com o período noturno aplicável. A prorrogação depois das 5h e outras compensações precisam ser conferidas conforme a CLT, a categoria e a norma coletiva." },
+  { question: "Quem começa a trabalhar às 18h recebe adicional noturno?", answer: "Não automaticamente. Para o empregado urbano, a regra geral começa às 22h. No meio rural, o período começa às 21h na lavoura e às 20h na pecuária, salvo norma mais favorável." },
+  { question: "Empregado doméstico tem direito ao adicional noturno?", answer: "Sim. A Lei Complementar nº 150 prevê adicional mínimo de 20% para trabalho entre 22h e 5h, além da hora noturna de 52 minutos e 30 segundos." },
+  { question: "Trabalhador rural tem direito ao adicional noturno?", answer: "Sim. O adicional mínimo é de 25%. Na lavoura, o período noturno vai das 21h às 5h; na pecuária, das 20h às 4h." },
+  { question: "Quem trabalha depois das 5h continua recebendo?", answer: "Pode continuar quando existe prorrogação de uma jornada cumprida integralmente no período noturno, conforme o entendimento do TST. Escala 12x36, norma coletiva e regime específico podem mudar a conclusão." },
+  { question: "Quem trabalha sem carteira assinada pode cobrar o adicional?", answer: "A falta de registro não elimina automaticamente direitos se os fatos demonstrarem uma relação de emprego. Como será necessário comprovar vínculo e jornada, é importante guardar escalas, mensagens, comprovantes e registros de horário." }
+];
+
+const schemas = [
+  { "@context": "https://schema.org", "@type": "Article", headline: h1, description, image: imageUrl, datePublished: publishedDate, dateModified: publishedDate, author: { "@type": "Person", name: lucasAlmeida.name, url: `${siteConfig.url}${lucasAlmeida.href}` }, mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl }, inLanguage: "pt-BR" },
+  { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })) }
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} breadcrumbs={[{ name: "Início", path: "/" }, { name: "Blog", path: "/blog/" }, { name: h1, path: canonicalPath }]} image="/quem-tem-direito-adicional-noturno.webp" ogType="article" publishedTime={publishedIso} modifiedTime={publishedIso}>
+  <JsonLd data={schemas} />
+  <article class="article-page">
+    <header class="article-header">
+      <div class="reading-width">
+        <nav class="breadcrumbs" aria-label="Navegação estrutural"><ol><li><a href="/">Início</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">Quem tem direito ao adicional noturno</li></ol></nav>
+        <h1>{h1}</h1>
+        <p class="article-intro">Regras para empregados urbanos, domésticos, rurais e jornadas especiais.</p>
+        <div class="article-dates"><span>Publicado em <time datetime={publishedDate}>27 de julho de 2026</time></span><span>Por <a href={lucasAlmeida.href}>{lucasAlmeida.name}</a></span></div>
+      </div>
+    </header>
+
+    <div class="reading-width article-body">
+      <img class="article-featured-image" src="/quem-tem-direito-adicional-noturno.webp" width="1500" height="1000" alt="Ilustração de trabalhadores urbanos, domésticos e rurais em jornada noturna." fetchpriority="high" />
+
+      <p>Tem direito ao adicional noturno quem mantém uma relação de emprego e trabalha, ainda que por parte da jornada, dentro do período noturno definido para sua categoria. Na regra urbana e doméstica, o intervalo geral vai das 22h às 5h; no trabalho rural, os horários e o percentual são diferentes.</p>
+      <p>O nome do cargo não decide sozinho. Porteiros, profissionais da saúde, operadores, motoristas, atendentes, trabalhadores rurais e empregados domésticos podem receber, mas o ponto central é combinar vínculo, horário efetivamente trabalhado e norma aplicável.</p>
+      <div class="article-formula"><p><strong>Resposta rápida:</strong> se uma pessoa empregada trabalhou dentro do período noturno da sua categoria, o adicional costuma ser devido sobre essas horas. Escala, contrato parcial ou jornada mista não eliminam o direito por si só.</p></div>
+
+      <h2>Como saber se você tem direito</h2>
+      <p>Antes de olhar apenas para o nome da função, confira estes pontos:</p>
+      <ul><li>existe relação de emprego ou lei específica que assegura remuneração noturna;</li><li>houve trabalho efetivo dentro do intervalo noturno da categoria;</li><li>o ponto, a escala ou outros registros confiáveis mostram essas horas;</li><li>a convenção ou o acordo coletivo prevê percentual ou horário mais favorável;</li><li>a folha separou adicional noturno, horas extras e eventual prorrogação após o período legal.</li></ul>
+      <p>Para uma estimativa inicial, use a <a href="/#calculadora">calculadora de adicional noturno</a>. Ela parte da regra urbana geral; os parâmetros precisam ser ajustados quando o vínculo é rural, doméstico ou sujeito a norma especial.</p>
+
+      <h2>Quem recebe segundo cada categoria</h2>
+      <div class="table-wrap article-table"><table><caption>Períodos noturnos gerais e adicionais mínimos</caption><thead><tr><th>Categoria</th><th>Período geral</th><th>Adicional mínimo</th><th>Ponto de atenção</th></tr></thead><tbody><tr><td>Empregado urbano</td><td>22h às 5h</td><td>20%</td><td>Hora noturna de 52min30s na regra geral.</td></tr><tr><td>Empregado doméstico</td><td>22h às 5h</td><td>20%</td><td>Lei própria e registro obrigatório da jornada.</td></tr><tr><td>Rural na lavoura</td><td>21h às 5h</td><td>25%</td><td>Não aplicar automaticamente os parâmetros urbanos.</td></tr><tr><td>Rural na pecuária</td><td>20h às 4h</td><td>25%</td><td>O período termina antes do urbano.</td></tr></tbody></table></div>
+
+      <h3>Empregados urbanos</h3>
+      <p>Na regra geral da CLT, o empregado urbano recebe o adicional pelas horas trabalhadas entre 22h e 5h. O artigo 73 também prevê adicional mínimo de 20% e hora noturna reduzida. Não é necessário que todo o turno seja noturno: se a jornada termina às 23h, o período entre 22h e 23h já pode gerar a parcela.</p>
+      <p>Em uma jornada das 18h à meia-noite, por exemplo, apenas o trecho das 22h à meia-noite entra automaticamente na regra urbana. Veja a base legal e a hora reduzida no guia sobre <a href="/blog/adicional-noturno-clt/">adicional noturno na CLT</a>.</p>
+
+      <h3>Empregados domésticos</h3>
+      <p>Cuidador, babá, motorista, cozinheiro e outros empregados domésticos podem receber adicional quando trabalham entre 22h e 5h. A <a class="external-link" href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp150.htm" target="_blank" rel="noopener noreferrer">Lei Complementar nº 150/2015 <span class="sr-only">(abre em nova aba)</span></a> prevê acréscimo mínimo de 20% e hora noturna de 52 minutos e 30 segundos.</p>
+      <p>Morar no local de trabalho não significa ficar à disposição durante toda a noite. Intervalos, repouso e tempo sem trabalho efetivo devem ser separados do período realmente laborado.</p>
+
+      <h3>Trabalhadores rurais</h3>
+      <p>O trabalhador rural segue horários próprios. Na lavoura, considera-se noturno o trabalho das 21h às 5h; na pecuária, das 20h às 4h. A <a class="external-link" href="https://www.planalto.gov.br/ccivil_03/leis/l5889.htm" target="_blank" rel="noopener noreferrer">Lei nº 5.889/1973 <span class="sr-only">(abre em nova aba)</span></a> fixa adicional de 25% sobre a remuneração normal para o trabalho rural noturno.</p>
+
+      <h2>Contratos e escalas que também podem gerar o adicional</h2>
+      <h3>Escala 12x36</h3><p>A escala 12x36 não elimina o adicional noturno. Se parte do plantão coincide com o período noturno, essas horas continuam sujeitas à regra da categoria. As horas prorrogadas depois das 5h devem ser conferidas separadamente, à luz da jornada, da norma coletiva e do entendimento aplicável.</p>
+      <h3>Jornada mista</h3><p>Na jornada mista, o adicional incide sobre o trecho noturno. Um empregado urbano que trabalha das 20h às 2h, por exemplo, tem quatro horas reais entre 22h e 2h, antes da aplicação da hora reduzida quando cabível.</p>
+      <h3>Contrato temporário, intermitente ou de tempo parcial</h3><p>A duração ou modalidade do contrato não retira automaticamente o direito. Quem presta trabalho no horário noturno deve ter essas horas remuneradas conforme a regra aplicável ao vínculo.</p>
+      <h3>Trabalho em home office</h3><p>O home office não afasta o adicional por si só. Quando há relação de emprego, prestação por horário e controle de jornada, o trabalho efetivo no período noturno pode gerar a parcela. Contratos por produção, por tarefa e situações do artigo 62 da CLT exigem análise específica.</p>
+
+      <h2>Situações em que o direito não é automático</h2>
+      <p>Prestadores realmente autônomos e pessoas jurídicas não recebem automaticamente o adicional previsto para empregados. Um contrato de PJ usado para encobrir relação de emprego, porém, pode ser revisto conforme os fatos.</p>
+      <p>O empregado público contratado pela CLT pode seguir as regras celetistas; o servidor estatutário depende do estatuto e da legislação do ente público. Também não basta o título de “gerente” ou “cargo de confiança” para afastar o direito: é necessário verificar o enquadramento real no artigo 62 da CLT.</p>
+      <p>A mudança definitiva do turno noturno para o diurno pode encerrar o pagamento da parcela dali em diante, sem apagar valores devidos pelas jornadas anteriores. Menores de 18 anos não podem trabalhar à noite; se isso ocorrer, a situação é irregular e requer orientação profissional.</p>
+
+      <h2>A partir de que hora nasce o direito?</h2>
+      <p>Não existe um horário único para todas as categorias. A comparação abaixo resume os períodos gerais urbanos, domésticos e rurais. Convenções ou acordos coletivos podem prever condição mais favorável.</p>
+      <figure class="article-figure"><img class="article-featured-image article-inline-image" src="/horarios-adicional-noturno-urbano-rural-domestico.webp" width="1400" height="900" loading="lazy" alt="Comparação dos horários de adicional noturno para trabalho urbano, doméstico, lavoura e pecuária." /><figcaption>Períodos noturnos gerais por categoria profissional.</figcaption></figure>
+      <p>Quem começa às 18h não recebe adicional automaticamente pela regra urbana: ela começa, em geral, às 22h. Já quem entra às 4h pode receber pelo trecho entre 4h e 5h, na regra urbana e doméstica.</p>
+      <p>Quando a jornada urbana é cumprida integralmente no período noturno e continua após as 5h, a <a class="external-link" href="https://www3.tst.jus.br/jurisprudencia/Sumulas_com_indice/Sumulas_Ind_51_100.html" target="_blank" rel="noopener noreferrer">Súmula 60 do TST <span class="sr-only">(abre em nova aba)</span></a> reconhece, em regra, o adicional também na prorrogação. Não inclua automaticamente todas as horas posteriores: escala 12x36, instrumento coletivo e regime específico podem alterar a análise.</p>
+
+      <h2>Exemplos rápidos para identificar o direito</h2>
+      <div class="table-wrap article-table"><table><caption>Exemplos de jornadas e interpretação geral</caption><thead><tr><th>Situação</th><th>Como interpretar</th></tr></thead><tbody><tr><td>Atendente urbano das 16h às 23h</td><td>Recebe adicional sobre o período das 22h às 23h, não sobre toda a jornada.</td></tr><tr><td>Enfermeira em plantão das 19h às 7h</td><td>Recebe pelas horas noturnas e deve conferir separadamente a prorrogação após 5h e a regra da escala.</td></tr><tr><td>Trabalhador de lavoura das 20h às 2h</td><td>O período noturno começa às 21h; o trecho das 21h às 2h entra na regra da lavoura.</td></tr><tr><td>Trabalhador de pecuária das 20h às 4h</td><td>Todo o turno coincide com o período noturno rural da pecuária e usa adicional mínimo de 25%.</td></tr><tr><td>Cuidadora doméstica das 22h às 6h</td><td>O período das 22h às 5h é noturno; a hora posterior exige conferência da regra aplicável.</td></tr></tbody></table></div>
+
+      <h2>Como conferir o adicional no holerite</h2>
+      <ol><li>Localize as rubricas “adicional noturno”, “hora noturna” e “hora extra noturna”.</li><li>Confira se a quantidade de horas corresponde ao período noturno da sua categoria.</li><li>Verifique se o percentual é de pelo menos 20% no urbano e doméstico ou 25% no rural, salvo condição mais favorável.</li><li>Observe se o sistema já converteu a hora reduzida antes de refazer a conta.</li><li>Leia a convenção coletiva para percentuais, bases e prorrogações específicas.</li></ol>
+      <p>Para entender a fórmula sem misturar cálculo com elegibilidade, consulte <a href="/blog/como-calcular-adicional-noturno/">como calcular adicional noturno passo a passo</a>.</p>
+
+      <h2>Erros comuns ao decidir quem tem direito</h2>
+      <ul><li>Achar que somente quem trabalha a noite inteira recebe.</li><li>Usar o horário urbano para lavoura ou pecuária.</li><li>Considerar todo turno iniciado às 18h como noturno.</li><li>Supor que a escala 12x36 elimina o adicional.</li><li>Ignorar horas noturnas ocasionais ou parciais.</li><li>Confundir adicional noturno com hora extra ou com o valor total da hora.</li></ul>
+
+      <h2>O que fazer quando o adicional não aparece</h2>
+      <p>Peça ao RH ou ao responsável pela folha a memória de cálculo e a explicação das rubricas. Compare a resposta com o controle de ponto, o contrato e a convenção coletiva.</p>
+      <p>Se a diferença continuar, reúna documentos e procure o sindicato, um profissional de departamento pessoal ou um advogado trabalhista. Situações sem registro, jornadas extensas, menores trabalhando à noite ou descontos recorrentes exigem atenção especial.</p>
+
+      <h2>Dúvidas frequentes</h2>
+      <div class="faq-list article-faq">{faqs.map((faq) => <details><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div>
+
+      <aside class="article-disclaimer"><h2>Informação importante</h2><p>Este conteúdo apresenta regras gerais e não substitui análise jurídica, contábil ou da folha de pagamento. Contrato, convenção coletiva, enquadramento profissional, controle de jornada e decisões aplicáveis ao caso podem alterar a conclusão.</p></aside>
+      <AuthorBox />
+    </div>
+  </article>
+</BaseLayout>

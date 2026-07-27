@@ -241,7 +241,7 @@ thead th { background: #f4f7f6; }
 .text-link { font-weight: 750; }
 .blog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; }
 .blog-grid .blog-card { display: flex; flex-direction: column; height: 100%; }
-.blog-grid .blog-card-image { aspect-ratio: 1200 / 630; }
+.blog-grid .blog-card-image { aspect-ratio: 1200 / 630; overflow: hidden; }
 .blog-grid .blog-card-image img { width: 100%; height: 100%; object-fit: cover; }
 .blog-grid .blog-card-content { display: flex; flex: 1; flex-direction: column; align-items: flex-start; }
 .blog-grid .blog-card-content h2 { font-size: 1.35rem; }

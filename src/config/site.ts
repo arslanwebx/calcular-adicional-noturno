@@ -6,7 +6,7 @@ export const siteConfig = {
   contactEmail: "contato@calculoadicionalnoturno.com",
   description:
     "Calculadora informativa para estimar o adicional noturno com regras configuráveis.",
-  contentModified: "2026-07-17"
+  contentModified: "2026-07-28"
 } as const;
 
 export const mainNavigation = [

@@ -1,0 +1,152 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import AuthorBox from "../../components/AuthorBox.astro";
+import { lucasAlmeida } from "../../config/authors";
+import { siteConfig } from "../../config/site";
+
+const title = "Percentual do Adicional Noturno: 20%, 25% ou Mais?";
+const h1 = "Percentual do Adicional Noturno: 20%, 25% ou Mais?";
+const description = "Entenda qual percentual de adicional noturno usar: 20%, 25% ou valor maior previsto em convenção coletiva. Veja as regras por categoria.";
+const canonicalPath = "/blog/percentual-do-adicional-noturno/";
+const articleUrl = `${siteConfig.url}${canonicalPath}`;
+const imageUrl = `${siteConfig.url}/percentual-adicional-noturno.webp`;
+const publishedDate = "2026-07-28";
+const publishedIso = "2026-07-28T09:00:00-03:00";
+
+const faqs = [
+  { question: "Qual é o percentual do adicional noturno pela CLT?", answer: "Para a regra geral do empregado urbano, o adicional é de pelo menos 20% sobre a hora diurna. A norma coletiva pode prever percentual maior." },
+  { question: "O adicional noturno é sempre de 20%?", answer: "Não. O trabalhador rural tem adicional de 25% pela regra geral, e outras categorias ou regimes podem ter legislação própria ou norma coletiva mais favorável." },
+  { question: "Quando o adicional noturno é de 25%?", answer: "Em regra, o trabalho rural recebe 25%. Advogado empregado e servidor público federal também possuem previsões específicas de 25%, com requisitos e horários próprios." },
+  { question: "Convenção coletiva pode aumentar o percentual?", answer: "Sim. Convenções e acordos coletivos podem estabelecer percentual superior ao mínimo legal, além de outras condições mais favoráveis." },
+  { question: "Os 20% incidem sobre todo o salário?", answer: "Não automaticamente. Em regra, o adicional é calculado sobre o valor da hora normal e sobre as horas que devem ser remuneradas como noturnas." },
+  { question: "Adicional noturno pode ser pago com hora extra?", answer: "Sim. Quando uma hora é simultaneamente noturna e extra, as parcelas podem se combinar. A base e a ordem do cálculo dependem das regras aplicáveis." }
+];
+
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: h1,
+    description,
+    image: imageUrl,
+    datePublished: publishedDate,
+    dateModified: publishedDate,
+    author: { "@type": "Person", name: lucasAlmeida.name, url: `${siteConfig.url}${lucasAlmeida.href}` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
+    inLanguage: "pt-BR"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Início", item: `${siteConfig.url}/` },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${siteConfig.url}/blog/` },
+      { "@type": "ListItem", position: 3, name: h1, item: articleUrl }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } }))
+  }
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} image="/percentual-adicional-noturno.webp" ogType="article" publishedTime={publishedIso} modifiedTime={publishedIso}>
+  <JsonLd data={schemas} />
+  <article class="article-page">
+    <header class="article-header">
+      <div class="reading-width">
+        <nav class="breadcrumbs" aria-label="Navegação estrutural"><ol><li><a href="/">Início</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">Percentual do adicional noturno</li></ol></nav>
+        <h1>{h1}</h1>
+        <p class="article-intro">O adicional noturno é de pelo menos 20% para empregados urbanos e domésticos, e de 25% para o trabalho rural. Convenções e acordos coletivos podem estabelecer percentual maior.</p>
+        <div class="article-dates"><span>Atualizado em <time datetime={publishedDate}>28 de julho de 2026</time></span><span>Por <a href={lucasAlmeida.href}>{lucasAlmeida.name}</a></span></div>
+      </div>
+    </header>
+
+    <div class="reading-width article-body">
+      <img class="article-featured-image" src="/percentual-adicional-noturno.webp" width="1672" height="941" alt="Ilustração de relógio noturno, calculadora e demonstrativo de pagamento" />
+
+      <p>Aplicar 20% automaticamente em qualquer jornada noturna pode levar a uma estimativa errada. Antes de calcular, identifique o tipo de vínculo, o horário considerado noturno e a existência de uma convenção ou acordo coletivo.</p>
+      <p>Se você já sabe o percentual e as horas do mês, use a <a href="/#calculadora">calculadora de adicional noturno</a>. Este guia explica como reconhecer a taxa que deve ser conferida antes da conta.</p>
+
+      <h2>Qual percentual do adicional noturno devo usar?</h2>
+      <p>Para a maioria dos empregados urbanos abrangidos pela CLT, o mínimo é 20% sobre a hora diurna. O <a class="external-link" href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm" target="_blank" rel="noopener noreferrer">artigo 73 da CLT <span class="sr-only">(abre em nova aba)</span></a> também define, na regra geral, o período entre 22h e 5h.</p>
+      <p>O percentual depende do enquadramento. A mesma taxa não significa que as demais regras sejam iguais: período noturno, hora reduzida e forma de apuração podem mudar de uma categoria para outra.</p>
+
+      <div class="table-wrap article-table">
+        <table>
+          <caption>Referências gerais de percentual e horário</caption>
+          <thead><tr><th>Categoria</th><th>Percentual mínimo geral</th><th>Período noturno geral</th></tr></thead>
+          <tbody>
+            <tr><th>Empregado urbano CLT</th><td>20%</td><td>22h às 5h</td></tr>
+            <tr><th>Empregado doméstico</th><td>20%</td><td>22h às 5h</td></tr>
+            <tr><th>Trabalhador rural na lavoura</th><td>25%</td><td>21h às 5h</td></tr>
+            <tr><th>Trabalhador rural na pecuária</th><td>25%</td><td>20h às 4h</td></tr>
+            <tr><th>Advogado empregado</th><td>25%</td><td>20h às 5h</td></tr>
+            <tr><th>Servidor público federal</th><td>25%</td><td>22h às 5h</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A tabela apresenta referências nacionais gerais. Estatutos, contratos, escalas e normas coletivas podem trazer condições diferentes para cada vínculo.</p>
+
+      <h2>Quando o adicional noturno é de 20%?</h2>
+      <p>O mínimo de 20% é a regra geral do trabalho urbano. Também se aplica ao emprego doméstico, conforme o <a class="external-link" href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp150.htm#art14" target="_blank" rel="noopener noreferrer">artigo 14 da Lei Complementar nº 150 <span class="sr-only">(abre em nova aba)</span></a>.</p>
+      <p>O cargo, por si só, não define o percentual. O ponto decisivo é o vínculo e a jornada. Uma pessoa que trabalha em hospital, indústria, hotel, supermercado, logística, portaria ou atendimento pode seguir a regra urbana se esse for o seu enquadramento.</p>
+
+      <h2>Quando o adicional noturno é de 25%?</h2>
+      <p>O trabalho rural tem adicional de 25%. Na lavoura, o período geral é das 21h às 5h; na pecuária, das 20h às 4h. Consulte a <a class="external-link" href="https://www.planalto.gov.br/ccivil_03/leis/l5889.htm#art7" target="_blank" rel="noopener noreferrer">legislação do trabalho rural <span class="sr-only">(abre em nova aba)</span></a> antes de adaptar uma fórmula urbana.</p>
+      <p>Advogado empregado e servidor público federal também possuem regras próprias de 25%, previstas, respectivamente, no Estatuto da Advocacia e na Lei nº 8.112. Servidores estaduais e municipais devem consultar o estatuto do respectivo ente.</p>
+
+      <img class="article-inline-image" src="/percentual-adicional-noturno-urbano-rural.webp" width="1672" height="941" loading="lazy" alt="Ilustração comparando jornada noturna urbana e trabalho rural" />
+
+      <h2>Percentual e hora noturna reduzida são diferentes</h2>
+      <p>O percentual aumenta o valor pago pela hora. A hora reduzida altera a forma de computar o tempo. No trabalho urbano e doméstico, a hora noturna de 52 minutos e 30 segundos pode fazer sete horas reais entre 22h e 5h corresponderem a oito horas noturnas para o cálculo.</p>
+      <p>Não use automaticamente essa conversão para o trabalho rural. A lei rural estabelece o percentual de 25%, mas não reproduz a hora ficta urbana de 52 minutos e 30 segundos.</p>
+
+      <h2>A convenção coletiva pode pagar mais?</h2>
+      <p>Sim. A lei estabelece um mínimo, não um teto. Convenções e acordos coletivos podem prever 25%, 30%, 35%, 40% ou outro percentual mais favorável, além de ampliar o período noturno ou definir uma base de cálculo própria.</p>
+      <p>Procure expressões como “adicional noturno”, “trabalho noturno”, “jornada noturna” e “hora noturna” na convenção coletiva. O RH, o sindicato profissional ou o sistema oficial de registro de instrumentos coletivos podem indicar o documento aplicável.</p>
+
+      <h2>O que significa receber 20% de adicional noturno?</h2>
+      <p>Receber 20% não significa aumentar todo o salário mensal em 20%. Em regra, calcula-se primeiro o valor da hora normal e, em seguida, a parcela adicional sobre cada hora que deve ser remunerada como noturna.</p>
+      <div class="article-formula" aria-label="Exemplo de adicional noturno de vinte por cento">
+        <p><strong>Hora normal</strong> = R$ 12,00</p>
+        <p><strong>Adicional por hora a 20%</strong> = R$ 12,00 × 20% = R$ 2,40</p>
+        <p><strong>Hora com adicional</strong> = R$ 12,00 + R$ 2,40 = R$ 14,40</p>
+      </div>
+      <p>Os R$ 2,40 são apenas a parcela adicional daquela hora. A quantidade de horas, a redução noturna, a hora extra e a norma coletiva podem mudar o total do mês.</p>
+
+      <h2>E quando existe hora extra noturna?</h2>
+      <p>Adicional noturno e hora extra remuneram situações diferentes. O primeiro compensa o trabalho no período noturno; o segundo remunera o tempo extraordinário. Quando a hora é simultaneamente noturna e extra, os dois componentes podem ser devidos.</p>
+      <p>A base e a ordem exatas do cálculo devem respeitar a norma coletiva e o método da folha. O mesmo cuidado vale para a prorrogação após 5h: a <a class="external-link" href="https://www.tst.jus.br/-/adicional-noturno-incide-sobre-periodo-trabalhado-apos-as-5h" target="_blank" rel="noopener noreferrer">orientação do TST <span class="sr-only">(abre em nova aba)</span></a> exige analisar a jornada efetivamente cumprida.</p>
+
+      <img class="article-inline-image" src="/percentual-adicional-noturno-holerite.webp" width="1672" height="941" loading="lazy" alt="Ilustração de holerite, calculadora e relógio para conferência do adicional noturno" />
+
+      <h2>Como conferir o percentual no holerite</h2>
+      <p>O holerite pode usar rubricas como adicional noturno, horas noturnas, adicional noturno 20%, adicional noturno 25%, hora extra noturna ou prorrogação noturna. Leia o demonstrativo junto com o espelho de ponto.</p>
+      <ol>
+        <li>Confirme a categoria e o horário do vínculo.</li>
+        <li>Veja o percentual indicado e compare-o com a convenção coletiva.</li>
+        <li>Confira a quantidade de horas e se elas já foram convertidas.</li>
+        <li>Verifique se horas extras aparecem em rubrica separada.</li>
+        <li>Peça a memória de cálculo ao responsável pela folha quando houver diferença relevante.</li>
+      </ol>
+
+      <h2>Erros que alteram o percentual devido</h2>
+      <ul>
+        <li><strong>Usar 20% para todo trabalhador:</strong> a taxa urbana é comum, mas não é universal.</li>
+        <li><strong>Ignorar a convenção coletiva:</strong> ela pode garantir percentual maior.</li>
+        <li><strong>Aplicar o percentual sobre o salário mensal inteiro:</strong> a base costuma ser o valor da hora normal.</li>
+        <li><strong>Confundir percentual com a hora total:</strong> 20% é a parcela adicional; a hora normal continua sendo outra parte da remuneração.</li>
+      </ul>
+
+      <h2>Perguntas frequentes</h2>
+      <div class="faq-list article-faq">{faqs.map((faq) => (<details><summary>{faq.question}</summary><p>{faq.answer}</p></details>))}</div>
+
+      <aside class="article-disclaimer"><h2>Informação importante</h2><p>Este conteúdo apresenta regras gerais. Convenções coletivas, estatutos, contratos e particularidades da jornada podem alterar o cálculo. Em caso de divergência no pagamento, consulte o RH, o sindicato ou um profissional qualificado.</p></aside>
+      <AuthorBox />
+    </div>
+  </article>
+</BaseLayout>
